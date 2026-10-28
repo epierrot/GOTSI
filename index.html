@@ -1,0 +1,976 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Boussole du Grand oral SI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout : une feuille de dessin technique — fond quadrillé, étapes en bandeau, pistes présentées comme des cartouches de plan. */
+:root{
+  --paper:#eef2ef; --paper-2:#fbfcfa; --grid:rgba(20,70,66,.07);
+  --ink:#17242c; --ink-2:#4d5d63; --line:#c5d0cc;
+  --accent:#0b6e69; --accent-soft:#d6ebe8; --on-accent:#ffffff;
+  --mark:#d99a00; --mark-soft:#fbefc8; --mark-ink:#5c4100;
+  --warn:#b2412f; --warn-soft:#f7e1dc;
+  --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --s-xs:.78rem; --s-sm:.88rem; --s-md:1rem; --s-lg:1.2rem; --s-xl:1.6rem; --s-2xl:clamp(2rem,5vw,3.1rem);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0f171b; --paper-2:#152027; --grid:rgba(120,200,190,.06);
+  --ink:#e3ebe8; --ink-2:#9fb1b0; --line:#2c3d43;
+  --accent:#4cc3b8; --accent-soft:#173a39; --on-accent:#08201e;
+  --mark:#f0bd45; --mark-soft:#3a2f12; --mark-ink:#f6d98d;
+  --warn:#f08a74; --warn-soft:#3d1f19; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f171b; --paper-2:#152027; --grid:rgba(120,200,190,.06);
+  --ink:#e3ebe8; --ink-2:#9fb1b0; --line:#2c3d43;
+  --accent:#4cc3b8; --accent-soft:#173a39; --on-accent:#08201e;
+  --mark:#f0bd45; --mark-soft:#3a2f12; --mark-ink:#f6d98d;
+  --warn:#f08a74; --warn-soft:#3d1f19; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:var(--s-md);line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+.eyebrow{font-family:var(--f-mono);font-size:var(--s-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--ink-2)}
+
+/* En-tête */
+header.top{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:end}
+header.top h1{font-size:var(--s-2xl);font-weight:800;font-variation-settings:"wdth" 118;letter-spacing:-.01em;margin-top:6px}
+header.top .lede{margin-top:12px;max-width:60ch;color:var(--ink-2)}
+.titleblock{border:1.5px solid var(--ink);background:var(--paper-2);display:grid;grid-template-columns:repeat(3,1fr);font-family:var(--f-mono);font-size:var(--s-xs)}
+.titleblock div{padding:8px 10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.titleblock div:nth-child(3n){border-right:0}
+.titleblock div:nth-last-child(-n+3){border-bottom:0}
+.titleblock span{color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em;font-size:.7rem}
+.titleblock b{font-family:var(--f-display);font-size:var(--s-lg);font-weight:700;font-variation-settings:"wdth" 110;font-variant-numeric:tabular-nums}
+@media (max-width:760px){header.top{grid-template-columns:1fr}}
+
+/* Étapes */
+nav.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1.5px solid var(--ink);background:var(--paper-2)}
+nav.steps button{border:0;border-right:1px solid var(--line);background:transparent;padding:10px 12px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:1px;min-width:0}
+nav.steps button:last-child{border-right:0}
+nav.steps .n{font-family:var(--f-mono);font-size:var(--s-xs);color:var(--ink-2)}
+nav.steps .l{font-weight:600;font-size:var(--s-sm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav.steps button[aria-current="step"]{background:var(--ink);color:var(--paper-2)}
+nav.steps button[aria-current="step"] .n{color:var(--paper-2);opacity:.75}
+nav.steps button.done .n::after{content:" ✓";color:var(--accent)}
+@media (max-width:640px){nav.steps .l{display:none} nav.steps button{align-items:center;padding:10px 4px} nav.steps .n{font-size:var(--s-sm)}}
+
+/* Panneaux */
+.panel{background:var(--paper-2);border:1px solid var(--line);padding:clamp(18px,3.5vw,32px);display:flex;flex-direction:column;gap:24px}
+.panel-head{display:flex;flex-direction:column;gap:6px}
+.panel-head h2{font-size:var(--s-xl);font-weight:750;font-variation-settings:"wdth" 112}
+.panel-head p{max-width:65ch;color:var(--ink-2)}
+.field{display:flex;flex-direction:column;gap:8px}
+.field > label,.field > .label{font-weight:600}
+.field .hint{font-size:var(--s-sm);color:var(--ink-2)}
+input[type=text],select,textarea{background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:10px 12px;width:100%;max-width:520px}
+textarea{max-width:none;min-height:84px;resize:vertical}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+
+/* Cartes de choix de spécialité */
+.spe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt label{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:3px;padding:10px 12px;cursor:pointer;background:var(--paper);height:100%}
+.opt label small{color:var(--ink-2);font-size:var(--s-xs)}
+.opt input:checked + label{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt input:focus-visible + label{outline:2.5px solid var(--accent);outline-offset:2px}
+
+/* Puces */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;background:var(--paper);font-size:var(--s-sm)}
+.chip input:checked + label{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.chip input:focus-visible + label{outline:2.5px solid var(--accent);outline-offset:2px}
+
+/* Échelle d'auto-évaluation */
+.scale-legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-mono);font-size:var(--s-xs);color:var(--ink-2)}
+.rate{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 20px;align-items:center;padding:12px 0;border-top:1px dashed var(--line)}
+.rate:first-of-type{border-top:0}
+.rate .what b{display:block}
+.rate .what span{font-size:var(--s-sm);color:var(--ink-2)}
+.seg{display:inline-grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--ink);border-radius:3px;overflow:hidden}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{padding:7px 12px;cursor:pointer;font-family:var(--f-mono);font-size:var(--s-xs);text-align:center;border-right:1px solid var(--line);white-space:nowrap}
+.seg label:last-of-type{border-right:0}
+.seg input:checked + label{background:var(--accent);color:var(--on-accent)}
+.seg input:focus-visible + label{outline:2.5px solid var(--accent);outline-offset:-3px}
+@media (max-width:640px){.rate{grid-template-columns:1fr}.seg{width:100%}.seg label{padding:8px 4px}}
+
+.other-in{margin-top:2px}
+.toggle{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.toggle input{width:18px;height:18px;margin-top:3px;accent-color:var(--accent)}
+
+/* Navigation bas */
+.navbar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{border:1.5px solid var(--ink);background:var(--paper-2);padding:10px 18px;border-radius:3px;cursor:pointer;font-weight:600}
+.btn:hover{background:var(--paper)}
+.btn.primary{background:var(--ink);color:var(--paper-2)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.small{padding:6px 12px;font-size:var(--s-sm)}
+.btn.ghost{border-color:var(--line)}
+.msg{font-size:var(--s-sm);color:var(--warn)}
+
+/* Résultats */
+.digest{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border:1.5px solid var(--ink);font-size:var(--s-sm)}
+.digest div{padding:10px 14px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:2px;min-width:0}
+.digest div:last-child{border-right:0}
+.digest span{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+@media (max-width:640px){.digest div{border-right:0;border-bottom:1px solid var(--line)}.digest div:last-child{border-bottom:0}}
+.advice{background:var(--accent-soft);border-left:3px solid var(--accent);padding:12px 16px;max-width:none}
+.tabs{display:flex;gap:0;border-bottom:1.5px solid var(--ink);flex-wrap:wrap}
+.tabs button{border:1.5px solid transparent;border-bottom:0;background:transparent;padding:10px 16px;cursor:pointer;font-weight:600;margin-bottom:-1.5px;display:flex;gap:8px;align-items:center}
+.tabs button[aria-selected="true"]{border-color:var(--ink);background:var(--paper-2)}
+.tabs .count{font-family:var(--f-mono);font-size:var(--s-xs);color:var(--ink-2)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:18px;align-items:start}
+.card{border:1.5px solid var(--ink);background:var(--paper-2);display:flex;flex-direction:column;min-width:0}
+.card-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;border-bottom:1px solid var(--ink);font-family:var(--f-mono);font-size:var(--s-xs)}
+.card-head > *{padding:6px 10px;border-right:1px solid var(--line);display:flex;align-items:center}
+.card-head > *:last-child{border-right:0}
+.card-head .ref{font-weight:500}
+.kind{text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.card.tr .kind{background:var(--mark-soft);color:var(--mark-ink)}
+.aff{gap:3px}
+.aff i{width:10px;height:10px;border:1px solid var(--accent);display:block}
+.aff i.on{background:var(--accent)}
+.card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px}
+.card-q{font-size:var(--s-lg);font-weight:700;font-variation-settings:"wdth" 104;line-height:1.25}
+.why{display:flex;flex-wrap:wrap;gap:6px}
+.why span{font-size:var(--s-xs);padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--ink)}
+.why span.kw,.why span.loc{background:var(--mark-soft);color:var(--mark-ink)}
+.vig{font-size:var(--s-sm);color:var(--warn);background:var(--warn-soft);padding:6px 10px;border-radius:3px}
+details{border-top:1px dashed var(--line);padding-top:10px}
+summary{cursor:pointer;font-weight:600;font-size:var(--s-sm)}
+details[open] summary{margin-bottom:10px}
+.pistes{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:var(--s-sm)}
+.notions{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px;font-size:var(--s-sm)}
+.notions div{border:1px solid var(--line);padding:8px 10px;border-radius:3px}
+.notions b,.demo b{display:block;font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2);font-weight:500;margin-bottom:2px}
+.demo{margin-top:10px;font-size:var(--s-sm)}
+.card-foot{display:flex;justify-content:flex-end;padding:0 16px 14px}
+.keep[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.empty{padding:20px;border:1px dashed var(--line);color:var(--ink-2)}
+
+/* Sélection + forge */
+.tray{border:1.5px solid var(--ink);display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.tray .slot{padding:14px 16px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:8px;min-width:0}
+.tray .slot:last-child{border-right:0}
+.tray .slot .q{font-family:var(--f-display);font-weight:650;font-variation-settings:"wdth" 104}
+.tray .slot.vide .q{color:var(--ink-2);font-family:var(--f-body);font-weight:400}
+.tray .acts{display:flex;gap:8px;flex-wrap:wrap}
+@media (max-width:640px){.tray{grid-template-columns:1fr}.tray .slot{border-right:0;border-bottom:1px solid var(--line)}}
+.forge{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+@media (max-width:820px){.forge{grid-template-columns:1fr}}
+.forge-in{display:flex;flex-direction:column;gap:14px}
+.inline{display:flex;gap:8px;flex-wrap:wrap}
+.inline > *{flex:1 1 140px}
+.gen{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.gen li{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;border:1px solid var(--line);padding:8px 10px;border-radius:3px;background:var(--paper)}
+.gen li span{min-width:0}
+.checks{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none;font-size:var(--s-sm)}
+.checks li{display:flex;gap:8px;align-items:flex-start}
+.auto .ok{color:var(--accent);font-weight:600}
+.auto .ko{color:var(--warn);font-weight:600}
+.auto .nt{color:var(--ink-2)}
+.copybox{width:100%;min-height:160px;font-family:var(--f-mono);font-size:var(--s-xs)}
+.orient{border:1px dashed var(--ink);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+footer{font-size:var(--s-xs);color:var(--ink-2);font-family:var(--f-mono)}
+@media (prefers-reduced-motion:no-preference){.panel{animation:rise .25s ease-out}@keyframes rise{from{transform:translateY(4px)}to{transform:none}}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Terminale · Spécialité Sciences de l’ingénieur</div>
+      <h1>Boussole du Grand oral</h1>
+      <p class="lede">Réponds à un court sondage sur ce que tu sais faire en SI, ce qui te passionne et ce que tu aimes dans ta deuxième spécialité. La boussole te propose des questions et des pistes de réflexion, en SI seule ou croisées avec ton autre spécialité. Rien n’est envoyé : tes réponses restent sur ton appareil.</p>
+    </div>
+    <div class="titleblock" aria-label="Format de l’épreuve">
+      <div><span>Préparation</span><b>20 min</b></div>
+      <div><span>Exposé</span><b>5 min</b></div>
+      <div><span>Échange</span><b>10 min</b></div>
+      <div><span>Orientation</span><b>5 min</b></div>
+      <div><span>Questions</span><b>2</b></div>
+      <div><span>Coefficient</span><b>10</b></div>
+    </div>
+  </header>
+
+  <nav class="steps" id="steps" aria-label="Étapes du sondage"></nav>
+
+  <!-- Étape 1 -->
+  <section class="panel" data-step="0">
+    <div class="panel-head">
+      <div class="eyebrow">Étape 1 sur 5</div>
+      <h2>Ton profil</h2>
+      <p>Ta deuxième spécialité permet de te proposer des questions transversales. Ton projet d’orientation sert pour la dernière partie de l’oral.</p>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label for="f-name">Prénom (facultatif)</label>
+        <input type="text" id="f-name" autocomplete="given-name" placeholder="Pour personnaliser ta fiche">
+      </div>
+      <div class="field">
+        <label for="f-or">Ton projet après le bac</label>
+        <select id="f-or"></select>
+        <input type="text" class="other-in" id="o-or" data-other="or" placeholder="Précise ton projet (métier, formation…)" hidden>
+      </div>
+    </div>
+    <div class="field">
+      <span class="label">Ta deuxième spécialité</span>
+      <div class="spe-grid" id="spe-grid" role="radiogroup" aria-label="Deuxième spécialité"></div>
+      <input type="text" class="other-in" id="o-spe" data-other="spe" placeholder="Précise ta spécialité (Arts, Biologie-écologie, LLCER espagnol…)" hidden>
+      <p class="msg" id="spe-msg" hidden>Choisis ta deuxième spécialité pour continuer.</p>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <span class="label">Tu préfères une question…</span>
+        <div class="chips" id="pref" role="radiogroup" aria-label="Type de question préféré"></div>
+      </div>
+      <div class="field">
+        <span class="label">Contexte local</span>
+        <label class="toggle" for="f-local"><input type="checkbox" id="f-local"> <span>Me proposer aussi des sujets ancrés à Mayotte (eau, cyclones, énergie insulaire, lagon…)</span></label>
+      </div>
+    </div>
+    <div class="navbar">
+      <button class="btn ghost small" type="button" id="btn-demo">Voir un exemple rempli</button>
+      <button class="btn primary" type="button" data-next>Suivant : connaissances SI</button>
+    </div>
+  </section>
+
+  <!-- Étape 2 -->
+  <section class="panel" data-step="1" hidden>
+    <div class="panel-head">
+      <div class="eyebrow">Étape 2 sur 5</div>
+      <h2>Ce que tu maîtrises en SI</h2>
+      <p>Sois honnête : un domaine que tu découvres n’est pas exclu, il sera simplement signalé comme « à consolider ». Le jury te questionnera pendant 10 minutes sur les notions que tu cites.</p>
+    </div>
+    <div class="scale-legend"><span>1 · Je découvre</span><span>2 · Ça va</span><span>3 · À l’aise</span><span>4 · Je maîtrise</span></div>
+    <div id="rates"></div>
+    <div class="navbar">
+      <button class="btn" type="button" data-prev>Précédent</button>
+      <button class="btn primary" type="button" data-next>Suivant : centres d’intérêt</button>
+    </div>
+  </section>
+
+  <!-- Étape 3 -->
+  <section class="panel" data-step="2" hidden>
+    <div class="panel-head">
+      <div class="eyebrow">Étape 3 sur 5</div>
+      <h2>Ce qui t’intéresse</h2>
+      <p>Une bonne question de Grand oral part d’une vraie curiosité. Choisis autant de thèmes que tu veux, mais ceux qui te parlent vraiment.</p>
+    </div>
+    <div class="field">
+      <span class="label">Thèmes qui te passionnent</span>
+      <div class="chips" id="themes"></div>
+      <input type="text" class="other-in" id="o-th" data-other="th" placeholder="Quel autre thème ? (mode, cuisine, aviation…)" hidden>
+    </div>
+    <div class="field">
+      <span class="label">Ce que tu aimes faire en SI</span>
+      <div class="chips" id="styles"></div>
+      <input type="text" class="other-in" id="o-sty" data-other="sty" placeholder="Qu’aimes-tu faire d’autre ? (programmer, dessiner, réparer…)" hidden>
+    </div>
+    <div class="field">
+      <label for="f-kw">Un objet, un système, un métier ou un projet qui te passionne (facultatif)</label>
+      <span class="hint">Exemples : drone, prothèse, moto, basket, panneaux solaires, ton projet de terminale… Les mots-clés servent à repérer les questions proches.</span>
+      <input type="text" id="f-kw" placeholder="drone, robot, musique…">
+    </div>
+    <div class="navbar">
+      <button class="btn" type="button" data-prev>Précédent</button>
+      <button class="btn primary" type="button" data-next>Suivant : 2ᵉ spécialité</button>
+    </div>
+  </section>
+
+  <!-- Étape 4 -->
+  <section class="panel" data-step="3" hidden>
+    <div class="panel-head">
+      <div class="eyebrow">Étape 4 sur 5</div>
+      <h2 id="ch-title">Ta deuxième spécialité</h2>
+      <p>Coche les chapitres que tu as aimés ou que tu comprends bien. C’est là que se trouve le croisement avec la SI.</p>
+    </div>
+    <div class="chips" id="chapters"></div>
+    <input type="text" class="other-in" id="o-ch" data-other="ch" placeholder="Quel autre chapitre ou notion ?" hidden>
+    <div class="navbar">
+      <button class="btn" type="button" data-prev>Précédent</button>
+      <button class="btn primary" type="button" data-next>Voir mes pistes</button>
+    </div>
+  </section>
+
+  <!-- Étape 5 -->
+  <section class="panel" data-step="4" hidden>
+    <div class="panel-head">
+      <div class="eyebrow">Étape 5 sur 5</div>
+      <h2 id="res-title">Tes pistes de questions</h2>
+      <p>Ces questions sont des points de départ. Garde-en deux, puis transforme-les en questions qui te ressemblent avec l’atelier plus bas.</p>
+    </div>
+    <div class="digest" id="digest"></div>
+    <p class="advice" id="advice"></p>
+    <div>
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div id="tabpanel" role="tabpanel" style="padding-top:18px;display:flex;flex-direction:column;gap:14px">
+        <div class="cards" id="cards"></div>
+        <div><button class="btn ghost small" type="button" id="btn-more"></button></div>
+      </div>
+    </div>
+
+    <div class="panel-head" style="margin-top:8px">
+      <div class="eyebrow">Ta sélection</div>
+      <h2>Mes deux questions</h2>
+      <p>Le jury en choisira une. Elles peuvent porter sur la SI seule, sur ta deuxième spécialité ou sur les deux.</p>
+    </div>
+    <div class="tray" id="tray"></div>
+
+    <div class="panel-head" style="margin-top:8px">
+      <div class="eyebrow">Atelier</div>
+      <h2>Rends ta question personnelle</h2>
+      <p>Choisis un système précis et un angle d’attaque : l’atelier propose des formulations. Puis vérifie ta question avec la grille.</p>
+    </div>
+    <div class="forge">
+      <div class="forge-in">
+        <div class="field">
+          <label for="fg-sys">Le système ou l’objet étudié (sans article)</label>
+          <div class="inline">
+            <input type="text" id="fg-sys" placeholder="drone de livraison, pompe solaire…">
+            <select id="fg-g" aria-label="Genre du nom"><option value="m">masculin (un)</option><option value="f">féminin (une)</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fg-angle">L’angle d’attaque</label>
+          <select id="fg-angle"></select>
+        </div>
+        <ul class="gen" id="gen"></ul>
+      </div>
+      <div class="forge-in">
+        <div class="field">
+          <label for="f-myq">Ma question, telle que je la dirai au jury</label>
+          <textarea id="f-myq" placeholder="Écris ou colle ta question ici"></textarea>
+        </div>
+        <ul class="checks auto" id="autochecks"></ul>
+        <ul class="checks" id="checks"></ul>
+      </div>
+    </div>
+
+    <div class="orient" id="orient"></div>
+
+    <div class="panel-head" style="margin-top:8px">
+      <div class="eyebrow">Partager</div>
+      <h2>Ma fiche pour le professeur</h2>
+      <p>Copie ta fiche et colle-la dans un message ou ton espace de travail pour en discuter avec ton enseignant.</p>
+    </div>
+    <div class="navbar" style="justify-content:flex-start">
+      <button class="btn primary" type="button" id="btn-copy">Copier ma fiche</button>
+      <span class="muted" id="copy-msg" role="status"></span>
+    </div>
+    <textarea class="copybox" id="copybox" readonly hidden aria-label="Fiche à copier"></textarea>
+
+    <div class="navbar">
+      <button class="btn" type="button" data-prev>Modifier mes réponses</button>
+      <button class="btn ghost small" type="button" id="btn-reset">Recommencer à zéro</button>
+    </div>
+    <p class="msg" id="reset-confirm" hidden>Tout effacer ? <button class="btn small" type="button" id="btn-reset-yes">Oui, effacer</button> <button class="btn small ghost" type="button" id="btn-reset-no">Annuler</button></p>
+  </section>
+
+  <footer>Boussole du Grand oral · Spécialité SI · Les questions proposées sont des pistes à retravailler avec ton professeur, pas des sujets clés en main.</footer>
+</div>
+
+<script>
+/* ---------- Référentiels ---------- */
+const DOMS=[
+ {id:"bes",l:"Innovation & besoin",h:"cahier des charges, SysML, éco-conception, analyse de cycle de vie"},
+ {id:"mec",l:"Mécanique",h:"statique, cinématique, dynamique, résistance des matériaux"},
+ {id:"nrj",l:"Énergie & puissance",h:"chaîne de puissance, rendement, conversion, stockage"},
+ {id:"ele",l:"Électricité & capteurs",h:"capteurs, conditionnement du signal, moteurs, hacheurs"},
+ {id:"num",l:"Information & numérique",h:"programmation, microcontrôleur, réseaux, transmission"},
+ {id:"aut",l:"Automatique",h:"systèmes asservis, régulation, correcteur, stabilité"},
+ {id:"mod",l:"Modélisation & simulation",h:"modèles multiphysiques, écarts mesuré / simulé, CAO"},
+ {id:"mat",l:"Matériaux & conception",h:"choix des matériaux, fabrication, impression 3D"}
+];
+const THEMES=[
+ ["sante","Santé & handicap"],["mob","Transports & mobilité"],["ener","Énergies renouvelables"],["env","Environnement & climat"],
+ ["sport","Sport"],["hab","Habitat & ville"],["esp","Aéronautique & espace"],["rob","Robotique & IA"],["com","Numérique & communication"],
+ ["eau","Eau & agriculture"],["risk","Risques naturels & sécurité"],["loisir","Musique, jeux & culture"],["mer","Mer & océans"]
+];
+const STYLES=[["calc","Modéliser et calculer"],["exp","Expérimenter et mesurer"],["conc","Inventer et concevoir"],["deb","Débattre des enjeux de société"],["hist","Raconter l’histoire d’une innovation"]];
+const SPE={
+ M:{l:"Mathématiques",s:"Maths",ch:[["suites","Suites et récurrence"],["fonc","Fonctions, dérivation, exp et ln"],["integ","Intégrales et primitives"],["eqdiff","Équations différentielles"],["proba","Probabilités et lois"],["geo","Géométrie dans l’espace"],["algo","Algorithmique en Python"]]},
+ P:{l:"Physique-Chimie",s:"PC",ch:[["meca","Mouvement et lois de Newton"],["fluide","Mécanique des fluides"],["ondes","Ondes et sons"],["lumiere","Lumière et photons"],["elec","Circuits électriques, condensateur"],["thermo","Énergie thermique et transferts"],["chimie","Piles, oxydoréduction, électrolyse"]]},
+ N:{l:"NSI",s:"NSI",ch:[["prog","Programmation, récursivité, POO"],["graphes","Graphes et algorithmes"],["bdd","Bases de données (SQL)"],["reseaux","Réseaux et routage"],["archi","Architecture, systèmes sur puce"],["secu","Sécurisation des communications"]]},
+ S:{l:"SVT",s:"SVT",ch:[["corps","Corps humain et santé"],["neuro","Système nerveux et muscles"],["climat","Climat et cycle du carbone"],["ecosys","Écosystèmes et biodiversité"],["agri","Plantes et agriculture"],["genet","Génétique et évolution"]]},
+ E:{l:"SES",s:"SES",ch:[["innov","Croissance et innovation"],["marche","Marchés et entreprises"],["travail","Travail, emploi, chômage"],["envpol","Politiques climatiques"],["inegal","Inégalités et justice sociale"]]},
+ H:{l:"HGGSP",s:"HGGSP",ch:[["espace","Nouveaux espaces de conquête"],["env","Environnement : exploiter, protéger"],["connaissance","Enjeux de la connaissance, cyberespace"],["geopol","Puissances et rivalités"],["guerre","Faire la guerre, faire la paix"],["patrimoine","Patrimoine et mémoire"]]},
+ A:{l:"LLCER Anglais",s:"Anglais",ch:[["innov","Innovation dans le monde anglophone"],["fiction","Science-fiction et imaginaires"],["media","Médias et réseaux"],["env","Environnement en débat"]]},
+ L:{l:"HLP",s:"HLP",ch:[["humain","Les limites de l’humain"],["techn","Création et technique"],["ethique","Morale et responsabilité"],["savoir","Science et vérité"]]},
+ X:{l:"Autre spécialité",s:"autre",ch:[]}
+};
+const ORIENT=[
+ ["","Choisis…"],
+ ["inge","École d’ingénieurs, prépa","Explique ce que ta question t’a appris sur la démarche de l’ingénieur : partir d’un besoin, modéliser, mesurer, comparer au cahier des charges. Cite une école ou une prépa visée et ce qui t’y attire."],
+ ["info","Informatique, numérique, cybersécurité","Montre comment ta question t’a fait toucher au code, aux données ou aux réseaux, et cite la formation visée (BUT informatique, école du numérique, licence…)."],
+ ["meca","Mécanique, aéronautique, automobile","Relie les efforts, mouvements ou matériaux étudiés aux métiers de la conception mécanique, et cite une formation (BUT GMP, BTS CPRP, école d’ingénieurs…)."],
+ ["ener","Énergie, environnement, eau","Montre que ta question t’a fait réfléchir au rendement et à l’impact environnemental, et cite un métier de la transition énergétique qui t’attire."],
+ ["btp","Bâtiment, travaux publics, architecture","Relie ta question à la construction : structures, confort, risques naturels. Cite une formation (BUT génie civil, BTS bâtiment, école d’architecture…)."],
+ ["sante","Santé, biomédical, sport","Explique comment la technique aide le soin ou la performance, et cite la formation visée (ingénieur biomédical, kinésithérapie, STAPS…)."],
+ ["elec","Électronique, robotique, automatisme","Montre ce que ta question t’a appris sur les capteurs, la commande et les asservissements, et cite une formation (BUT GEII, BTS CIEL, école d’ingénieurs…)."],
+ ["com","Commerce, gestion, droit, économie","Montre que comprendre la technique aide à décider : coût, marché, réglementation. Cite une formation (école de commerce, BUT GEA, droit…)."],
+ ["ens","Enseignement, recherche","Explique comment tu as vulgarisé ta question et ce que tu aimerais transmettre ou découvrir. Cite une licence ou un master visé."],
+ ["autre","Autre (à préciser)","Explique au jury le lien entre ta question et ce projet, puis cite la formation visée et ce qui t’y attire."],
+ ["nsp","Je ne sais pas encore","Ce n’est pas un problème : dis au jury ce que ta question t’a fait découvrir, quels métiers t’intriguent et ce que tu fais pour choisir (salons, immersions, Parcoursup)."]
+];
+const ANGLES=[
+ ["perf","Performance",[
+  "Comment améliorer les performances {du} {sys} sans augmenter sa consommation d’énergie ?",
+  "Quelles limites techniques freinent aujourd’hui {le} {sys} ?",
+  "En quoi la modélisation permet-elle d’optimiser {le} {sys} ?"]],
+ ["secu","Sécurité & fiabilité",[
+  "Comment garantir la sécurité des utilisateurs {du} {sys} ?",
+  "Comment {le} {sys} réagit-{il} face à une défaillance ou à une perturbation ?",
+  "Peut-on faire confiance à {un} {sys} automatisé{e} ?"]],
+ ["envir","Énergie & environnement",[
+  "{Le} {sys} est-{il} vraiment compatible avec la transition écologique ?",
+  "Comment réduire l’impact environnemental {du} {sys} sur tout son cycle de vie ?",
+  "D’où vient l’énergie {du} {sys} et comment en limiter les pertes ?"]],
+ ["acces","Coût & accessibilité",[
+  "Comment rendre {le} {sys} accessible au plus grand nombre ?",
+  "Peut-on concevoir {un} {sys} low-tech aussi efficace que la version high-tech ?",
+  "Comment adapter {le} {sys} à un territoire comme Mayotte ?"]],
+ ["soc","Société & éthique",[
+  "{Le} {sys} va-t-{il} transformer notre façon de vivre ?",
+  "Faut-il fixer des limites à l’utilisation {du} {sys} ?",
+  "Qui est responsable quand {le} {sys} se trompe ?"]],
+ ["hist","Histoire d’une innovation",[
+  "Comment {le} {sys} a-t-{il} évolué grâce aux progrès techniques ?",
+  "Quelle innovation a rendu {le} {sys} possible ?",
+  "À quoi ressemblera {le} {sys} dans vingt ans ?"]]
+];
+const CHECKS=[
+ "Je peux citer un système réel et le montrer (photo, schéma, maquette).",
+ "Je sais quelles notions de SI (et de ma 2ᵉ spé) je mobilise.",
+ "Je peux l’expliquer en 5 minutes à quelqu’un qui ne fait pas de SI.",
+ "J’ai une réponse argumentée, avec des chiffres ou des mesures.",
+ "Elle me concerne personnellement : je peux dire pourquoi je l’ai choisie."
+];
+
+/* ---------- Banque de questions ----------
+ s : SI ou code de la 2e spé · d : domaines SI · t : thèmes · c : chapitres 2e spé · y : styles · o : orientations
+ k : mots-clés · l : ancrage Mayotte · p : pistes · n / n2 : notions · x : support à montrer */
+const Q=[
+{s:"SI",q:"Comment un exosquelette peut-il soulager l’effort d’un travailleur sans le mettre en danger ?",d:["mec","aut","bes"],t:["sante","rob"],y:["calc","conc"],o:["sante","meca","elec","inge"],k:"exosquelette dos epaule ouvrier usine handicap",
+ p:["Identifie les efforts sur le dos ou l’épaule lors d’un port de charge et chiffre-les avec un modèle statique.","Compare un exosquelette passif (ressorts) et actif (motorisé) : performances, masse, autonomie, coût.","Montre comment la commande limite le couple pour éviter de blesser l’utilisateur."],
+ n:"Statique, couple, chaîne de puissance, asservissement en effort",x:"Maquette d’un bras avec ressort de rappel et dynamomètre pour mesurer l’effort économisé."},
+{s:"SI",q:"Pourquoi un vélo à assistance électrique coupe-t-il son aide à 25 km/h, et comment la régulation est-elle réalisée ?",d:["nrj","aut","ele"],t:["mob","sport"],y:["calc","exp"],o:["elec","ener","meca"],k:"velo vae trottinette moteur batterie pedale",
+ p:["Explique la réglementation et ce qu’elle change pour la sécurité et l’assurance.","Décris la chaîne de puissance : batterie, contrôleur, moteur moyeu ou pédalier, capteur de couple.","Analyse la boucle de régulation qui dose l’assistance selon l’effort du cycliste et la vitesse."],
+ n:"Chaîne de puissance, capteur de couple, rendement, boucle fermée",x:"Relevé de courant et de vitesse sur un VAE ou un moteur de banc."},
+{s:"SI",q:"Comment un drone parvient-il à rester stable face à une rafale de vent ?",d:["aut","mec","num"],t:["esp","rob","risk"],y:["calc","exp"],o:["meca","elec","inge"],k:"drone helice vol quadricoptere livraison stabilite",l:1,
+ p:["Identifie les capteurs (gyroscope, accéléromètre) et ce qu’ils mesurent vraiment.","Explique le rôle d’un correcteur PID et l’effet de chaque terme sur la réponse.","Relie la question à un usage concret : livraison de médicaments ou surveillance du lagon après un cyclone."],
+ n:"Asservissement, correcteur PID, centrale inertielle, dynamique en rotation",x:"Balancier à hélice asservi : comparer la réponse avec et sans correcteur."},
+{s:"SI",q:"Une voiture électrique est-elle vraiment plus efficace énergétiquement qu’une voiture thermique ?",d:["nrj","mod"],t:["mob","env","ener"],y:["calc","deb"],o:["ener","meca","inge"],k:"voiture electrique thermique tesla batterie essence",
+ p:["Compare les rendements « du réservoir à la roue » des deux chaînes de puissance.","Élargis au cycle de vie : fabrication de la batterie, origine de l’électricité.","Discute le cas d’un territoire où l’électricité vient surtout du fioul, comme Mayotte."],
+ n:"Rendement global, chaîne de puissance, analyse de cycle de vie",x:"Tableau comparatif chiffré des pertes de chaque maillon de la chaîne."},
+{s:"SI",q:"Comment concevoir une prothèse de main imprimée en 3D à faible coût ?",d:["mat","mec","bes"],t:["sante"],y:["conc","exp"],o:["sante","meca","inge"],k:"prothese main impression 3d handicap enfant",
+ p:["Rédige le cahier des charges : préhension, masse, coût, adaptation à la croissance d’un enfant.","Analyse le mécanisme de flexion des doigts par câbles et la transmission du mouvement du poignet.","Justifie le choix du matériau d’impression (PLA, PETG, TPU) selon les efforts."],
+ n:"Cahier des charges, cinématique, choix de matériaux, fabrication additive",x:"Doigt imprimé en 3D actionné par un câble, avec mesure de l’effort de serrage."},
+{s:"SI",q:"Comment un bâtiment peut-il résister à un séisme ?",d:["mec","mod","mat"],t:["hab","risk"],y:["calc","exp"],o:["btp","inge"],k:"seisme tremblement terre batiment parasismique immeuble",l:1,
+ p:["Explique pourquoi un bâtiment entre en résonance et ce que cela provoque.","Compare des solutions parasismiques : chaînages, isolateurs à la base, amortisseurs.","Appuie-toi sur l’essaim sismique de Mayotte (2018) et les normes de construction locales."],
+ n:"Oscillations, résonance, rigidité, simulation de structure",x:"Maquette de bâtiment sur table vibrante, avec et sans amortisseur."},
+{s:"SI",q:"Comment une maison peut-elle résister aux vents d’un cyclone ?",d:["mec","mat","mod"],t:["hab","risk"],y:["calc","conc"],o:["btp","inge"],k:"cyclone chido vent toiture tole maison",l:1,
+ p:["Estime l’effort du vent sur une toiture et explique pourquoi elle s’arrache par dépression.","Compare les fixations et ancrages possibles d’une toiture en tôle.","Propose des améliorations accessibles, à partir des dégâts du cyclone Chido (décembre 2024)."],
+ n:"Actions mécaniques, pression, liaisons, résistance des matériaux",x:"Maquette de toit soufflée par un ventilateur, mesure de l’effort d’arrachement."},
+{s:"SI",q:"Comment stabiliser le réseau électrique d’une île quand on y ajoute beaucoup de solaire ?",d:["nrj","aut","ele"],t:["ener","env"],y:["calc","deb"],o:["ener","elec","inge"],k:"reseau electrique ile solaire centrale fioul edm",l:1,
+ p:["Explique pourquoi production et consommation doivent être égales à chaque instant.","Montre le problème de l’intermittence solaire sur un réseau isolé, non relié au continent.","Compare les solutions : stockage par batteries, pilotage de la demande, prévision météo."],
+ n:"Puissance, fréquence du réseau, stockage, régulation",x:"Courbes de production et de consommation sur une journée, avec simulation d’un stockage."},
+{s:"SI",q:"Comment produire de l’eau potable à partir de l’eau de mer en consommant le moins d’énergie possible ?",d:["nrj","mod"],t:["eau","env","mer"],y:["calc","deb"],o:["ener","inge"],k:"dessalement eau potable osmose secheresse penurie",l:1,
+ p:["Explique le principe de l’osmose inverse et où passe l’énergie.","Calcule l’énergie nécessaire par mètre cube et compare-la à d’autres solutions (forages, retenues collinaires).","Relie la question à la crise de l’eau de 2023 à Mayotte et à l’usine de Petite-Terre."],
+ n:"Chaîne de puissance d’une pompe, rendement, récupération d’énergie",x:"Bilan énergétique chiffré d’une usine, ou petite maquette de filtration sous pression."},
+{s:"SI",q:"Comment une pompe solaire peut-elle irriguer un champ sans batterie ?",d:["nrj","ele","mod"],t:["eau","ener"],y:["exp","calc"],o:["ener","elec"],k:"pompe solaire irrigation agriculture panneau",l:1,
+ p:["Décris la chaîne d’énergie, du panneau photovoltaïque jusqu’au débit d’eau.","Explique pourquoi on stocke de l’eau dans un réservoir plutôt que de l’électricité.","Dimensionne un panneau pour un besoin d’arrosage réaliste."],
+ n:"Chaîne d’énergie, puissance hydraulique, rendement, dimensionnement",x:"Mesure du débit d’une petite pompe selon l’éclairement du panneau."},
+{s:"SI",q:"Comment un robot aspirateur sait-il où il se trouve dans une pièce ?",d:["num","ele","aut"],t:["rob","hab"],y:["exp","conc"],o:["info","elec"],k:"robot aspirateur lidar capteur cartographie maison",
+ p:["Recense les capteurs : odométrie, lidar, capteurs de chute, et leur précision.","Explique comment le robot construit une carte et s’y repère.","Discute la question des données collectées dans l’intimité de la maison."],
+ n:"Capteurs, traitement de l’information, algorithme de déplacement",x:"Robot mobile programmé pour éviter des obstacles, avec mesure de la dérive."},
+{s:"SI",q:"Comment une voiture autonome détecte-t-elle un piéton ?",d:["num","ele"],t:["mob","rob"],y:["deb","exp"],o:["info","elec","inge"],k:"voiture autonome camera radar lidar pieton",
+ p:["Compare les capteurs caméra, radar et lidar : portée, conditions de pluie ou de nuit.","Explique la fusion de données et pourquoi on combine plusieurs capteurs.","Discute les limites : erreurs de détection, responsabilité en cas d’accident."],
+ n:"Capteurs, chaîne d’information, traitement du signal",x:"Capteur ultrason ou caméra reliés à une carte programmable qui déclenche une alerte."},
+{s:"SI",q:"Comment la domotique permet-elle de réduire la consommation d’énergie d’un logement ?",d:["num","nrj","ele"],t:["hab","ener"],y:["exp","conc"],o:["elec","ener","btp"],k:"domotique maison connectee climatisation chauffage",
+ p:["Identifie les postes de consommation d’un logement et ceux que l’on peut piloter.","Décris une chaîne d’information complète : capteur, traitement, actionneur.","Chiffre l’économie réelle, et compare-la à l’énergie consommée par les objets connectés eux-mêmes."],
+ n:"Chaîne d’information, capteurs, bilan énergétique",x:"Prototype qui coupe une climatisation quand une fenêtre est ouverte."},
+{s:"SI",q:"Comment un ascenseur garantit-il la sécurité de ses passagers ?",d:["mec","aut","ele"],t:["hab"],y:["conc","calc"],o:["meca","elec","btp"],k:"ascenseur cabine cable frein securite",
+ p:["Décris la chaîne de puissance : moteur, réducteur, câbles, contrepoids.","Explique le parachute de sécurité qui bloque la cabine en cas de rupture.","Montre comment l’asservissement assure un arrêt précis au niveau de l’étage."],
+ n:"Dynamique, chaîne de puissance, sécurité fonctionnelle, asservissement de position",x:"Maquette d’ascenseur programmée, mesure de la précision d’arrêt."},
+{s:"SI",q:"Comment un télescope spatial garde-t-il son orientation avec une telle précision ?",d:["aut","mec"],t:["esp"],y:["calc","hist"],o:["meca","inge"],k:"telescope james webb satellite espace orientation",
+ p:["Explique pourquoi l’orientation d’un satellite doit être précise et stable.","Décris les roues de réaction et le principe d’action-réaction en rotation.","Montre comment la boucle d’asservissement corrige les petites perturbations."],
+ n:"Dynamique en rotation, moment d’inertie, asservissement",x:"Plateau tournant suspendu entraîné par une roue d’inertie motorisée."},
+{s:"SI",q:"Comment une hydrolienne transforme-t-elle les courants marins en électricité ?",d:["nrj","mec"],t:["mer","ener"],y:["calc","hist"],o:["ener","meca"],k:"hydrolienne courant marin maree energie mer",
+ p:["Compare la puissance récupérable dans l’eau et dans l’air à même vitesse.","Décris la chaîne de conversion : turbine, multiplicateur, génératrice, câble sous-marin.","Analyse les contraintes du milieu marin : corrosion, biodiversité, maintenance."],
+ n:"Conversion d’énergie, puissance mécanique, rendement, choix de matériaux",x:"Petite turbine dans un courant d’eau, mesure de la tension produite."},
+{s:"SI",q:"Comment l’éco-conception peut-elle réduire l’impact d’un smartphone ?",d:["mat","bes"],t:["env","com"],y:["deb","conc"],o:["ener","inge","com"],k:"smartphone telephone eco conception recyclage",
+ p:["Réalise une analyse de cycle de vie simplifiée : où se concentre l’impact ?","Étudie un téléphone conçu pour être réparable et ses choix techniques.","Discute le rôle de l’indice de réparabilité et des comportements des utilisateurs."],
+ n:"Analyse de cycle de vie, éco-conception, choix de matériaux",x:"Démontage commenté d’un vieux téléphone, avec relevé des matériaux."},
+{s:"SI",q:"Comment des capteurs connectés peuvent-ils transmettre des données très loin avec très peu d’énergie ?",d:["num","ele","nrj"],t:["com","env"],y:["exp","calc"],o:["info","elec"],k:"lora iot objet connecte capteur antenne pile",
+ p:["Explique le compromis entre débit, portée et consommation d’une transmission radio.","Calcule l’autonomie d’un capteur qui se réveille quelques secondes par heure.","Donne un usage concret : suivi d’un niveau d’eau, d’une culture ou d’une station météo."],
+ n:"Transmission de l’information, modes veille, bilan énergétique",x:"Carte programmable en veille profonde avec mesure du courant consommé."},
+{s:"SI",q:"Comment des capteurs permettent-ils d’analyser et d’améliorer la performance d’un sportif ?",d:["ele","num","mec"],t:["sport","sante"],y:["exp","calc"],o:["sante","elec","info"],k:"sport sprint course football basket capteur accelerometre",
+ p:["Choisis un geste (sprint, saut, tir) et identifie les grandeurs à mesurer.","Compare les capteurs : accéléromètre, centrale inertielle, caméra rapide.","Explique comment traiter les données pour en tirer un conseil d’entraînement."],
+ n:"Capteurs, acquisition, traitement de données, cinématique",x:"Mesure d’accélération d’un saut avec un téléphone ou une carte programmable."},
+{s:"SI",q:"Comment une raquette ou une chaussure de sport est-elle conçue pour améliorer la performance ?",d:["mat","mec","mod"],t:["sport"],y:["conc","exp"],o:["meca","sante","inge"],k:"raquette chaussure tennis padel running semelle",
+ p:["Identifie la fonction principale : amortir, restituer l’énergie, transmettre l’effort.","Compare les matériaux (composites, mousses) et leurs propriétés mécaniques.","Explique comment la simulation aide à tester des formes avant de fabriquer."],
+ n:"Matériaux, énergie de déformation, simulation, cahier des charges",x:"Test de rebond d’une balle sur différents matériaux avec une vidéo ralentie."},
+{s:"SI",q:"Comment l’ABS empêche-t-il les roues d’une voiture de se bloquer au freinage ?",d:["aut","mec","num"],t:["mob"],y:["calc","hist"],o:["meca","elec","inge"],k:"abs frein freinage voiture moto",
+ p:["Explique pourquoi une roue bloquée freine moins bien et empêche de diriger.","Décris la boucle : capteurs de vitesse des roues, calculateur, modulateur de pression.","Retrace l’histoire de l’ABS et son passage de l’aviation à l’automobile."],
+ n:"Frottement, asservissement, chaîne d’information",x:"Simulation ou maquette d’une roue freinée avec détection de blocage."},
+{s:"SI",q:"Comment une intelligence artificielle peut-elle trier les déchets ?",d:["num","aut"],t:["rob","env"],y:["exp","deb"],o:["info","elec"],k:"ia intelligence artificielle tri dechet recyclage camera huskylens",
+ p:["Explique le principe d’apprentissage : images d’exemple, entraînement, taux de réussite.","Décris le système complet, de la caméra au bras qui trie.","Discute les limites : erreurs, emplois, coût face au tri manuel."],
+ n:"Chaîne d’information, apprentissage automatique, commande d’un actionneur",x:"Caméra à reconnaissance d’objets qui commande un servomoteur de tri."},
+{s:"SI",q:"Comment une éolienne adapte-t-elle sa production à la vitesse du vent ?",d:["nrj","aut","mec"],t:["ener"],y:["calc","exp"],o:["ener","meca"],k:"eolienne vent pale energie",
+ p:["Explique pourquoi la puissance du vent varie avec le cube de sa vitesse.","Décris l’orientation des pales et de la nacelle pour optimiser ou limiter la puissance.","Montre comment l’éolienne se protège quand le vent est trop fort."],
+ n:"Puissance mécanique, conversion d’énergie, régulation",x:"Petite éolienne face à un ventilateur, mesure de la puissance selon l’angle des pales."},
+{s:"SI",q:"Comment stocker l’énergie solaire pour l’utiliser la nuit ?",d:["nrj","ele"],t:["ener","hab"],y:["calc","deb"],o:["ener","elec"],k:"stockage batterie solaire nuit energie",l:1,
+ p:["Compare les solutions de stockage : batteries, pompage-turbinage, hydrogène, stockage thermique.","Dimensionne une batterie pour un foyer et chiffre son coût.","Discute la durée de vie et le recyclage des batteries."],
+ n:"Énergie, puissance, rendement de stockage, dimensionnement",x:"Panneau, régulateur et batterie avec relevé de charge et décharge."},
+{s:"SI",q:"Comment un robot chirurgical peut-il être plus précis que la main d’un chirurgien ?",d:["aut","mec","num"],t:["sante","rob"],y:["calc","deb"],o:["sante","elec","inge"],k:"robot chirurgical chirurgie hopital medecine bras",
+ p:["Explique la démultiplication des mouvements et le filtrage des tremblements.","Décris l’asservissement en position des articulations du bras.","Discute la place du chirurgien : qui décide, qui est responsable ?"],
+ n:"Cinématique, asservissement de position, précision",x:"Bras robotisé ou servomoteur asservi, mesure de l’erreur de position."},
+{s:"SI",q:"Comment la simulation numérique permet-elle de concevoir un produit sans fabriquer de prototype ?",d:["mod","mat","mec"],t:["mob","esp"],y:["calc","conc"],o:["meca","inge"],k:"simulation cao solidworks prototype jumeau numerique",
+ p:["Compare le coût et la durée d’une conception avec et sans prototypes physiques.","Explique ce qu’est un modèle et pourquoi il y a toujours un écart avec le réel.","Montre un exemple où la simulation a été validée par une mesure."],
+ n:"Modélisation, écarts mesuré / simulé, CAO, simulation mécanique",x:"Comparaison entre une simulation de pièce et un essai réel en flexion."},
+{s:"SI",q:"Comment surveiller la qualité de l’eau d’un lagon avec des capteurs autonomes ?",d:["ele","num","nrj"],t:["mer","env","eau"],y:["exp","conc"],o:["ener","elec","info"],k:"lagon corail eau capteur bouee temperature",l:1,
+ p:["Choisis les grandeurs à suivre : température, turbidité, salinité, pH.","Conçois une bouée autonome : alimentation solaire, étanchéité, transmission.","Explique comment les données peuvent alerter sur un risque pour les coraux."],
+ n:"Capteurs, chaîne d’information, autonomie énergétique",x:"Sonde de température étanche reliée à une carte qui enregistre les mesures."},
+{s:"SI",q:"Comment la suspension d’une moto concilie-t-elle confort et sécurité ?",d:["mec","mod"],t:["mob","sport"],y:["calc","exp"],o:["meca","inge"],k:"moto suspension amortisseur scooter ressort",
+ p:["Explique le rôle séparé du ressort et de l’amortisseur.","Modélise la suspension par un système masse-ressort-amortisseur.","Montre le compromis entre confort (filtrer les chocs) et adhérence (garder la roue au sol)."],
+ n:"Schéma cinématique, oscillations, amortissement, modélisation",x:"Masse suspendue à un ressort, avec et sans amortissement, filmée au ralenti."},
+{s:"SI",q:"Comment un gyropode ou une trottinette auto-équilibrée tient-il debout ?",d:["aut","mec","ele"],t:["mob","rob"],y:["calc","exp"],o:["elec","meca","inge"],k:"gyropode segway hoverboard equilibre pendule",
+ p:["Explique l’analogie avec un pendule inversé, instable par nature.","Décris la boucle : capteur d’inclinaison, calculateur, moteurs des roues.","Montre ce qui se passe si le correcteur est mal réglé."],
+ n:"Asservissement, stabilité, capteurs inertiels",x:"Petit robot pendule inversé ou simulation de la boucle."},
+{s:"SI",q:"Comment un instrument électronique transforme-t-il un geste en son ?",d:["ele","num"],t:["loisir"],y:["conc","exp"],o:["elec","info"],k:"musique son guitare synthetiseur midi instrument",
+ p:["Décris la chaîne d’information, du capteur (touche, corde, capteur de distance) au haut-parleur.","Explique la numérisation du son : échantillonnage et quantification.","Conçois un instrument original et justifie tes choix de capteurs."],
+ n:"Chaîne d’information, capteurs, numérisation, conversion",x:"Instrument à capteur de distance qui joue une note selon la position de la main."},
+{s:"SI",q:"Comment une manette de jeu vidéo traduit-elle les mouvements du joueur ?",d:["ele","num"],t:["loisir","com"],y:["exp","conc"],o:["info","elec"],k:"jeu video manette console gamer vibration",
+ p:["Identifie les capteurs : joysticks, gâchettes, accéléromètre, gyroscope.","Explique la transmission sans fil des commandes et le problème de la latence.","Analyse le retour haptique : comment la manette fait-elle ressentir un choc ?"],
+ n:"Capteurs, transmission de l’information, actionneurs",x:"Carte avec accéléromètre qui pilote un objet à l’écran."},
+{s:"SI",q:"Comment concevoir un objet réparable plutôt que jetable ?",d:["bes","mat"],t:["env"],y:["deb","conc"],o:["inge","ener","com"],k:"reparable obsolescence recyclage durable",
+ p:["Choisis un objet du quotidien et repère ce qui empêche sa réparation.","Propose des choix de conception : vis plutôt que colle, pièces standard, modularité.","Discute le coût et l’intérêt pour le fabricant et pour l’utilisateur."],
+ n:"Éco-conception, cahier des charges, assemblage, cycle de vie",x:"Démontage d’un objet et proposition d’une version modulaire en CAO."},
+
+{s:"M",q:"Comment les mathématiques permettent-elles de régler un asservissement ?",d:["aut","mod"],c:["eqdiff","fonc"],t:["rob","mob"],y:["calc"],o:["inge","elec"],k:"asservissement pid regulation drone",
+ p:["Modélise un système simple par une équation différentielle du premier ordre.","Interprète la solution exponentielle : temps de réponse, valeur finale.","Montre l’effet du réglage du correcteur sur la courbe obtenue."],
+ n:"Asservissement, correcteur, temps de réponse",n2:"Équations différentielles, fonction exponentielle",x:"Comparaison entre la courbe mesurée d’un moteur et la solution calculée."},
+{s:"M",q:"Comment prévoir l’autonomie d’une batterie de véhicule électrique ?",d:["nrj","mod"],c:["integ","fonc","suites"],t:["mob","ener"],y:["calc"],o:["ener","inge"],k:"autonomie batterie voiture electrique trottinette",
+ p:["Relie l’énergie consommée à l’intégrale de la puissance au cours du trajet.","Modélise la perte de capacité de la batterie au fil des cycles avec une suite.","Compare ton estimation à l’autonomie annoncée par un constructeur."],
+ n:"Énergie, puissance, stockage",n2:"Intégrales, suites géométriques",x:"Relevé de puissance d’un trajet et calcul de l’aire sous la courbe."},
+{s:"M",q:"Comment calculer la fiabilité d’un système dont dépendent des vies ?",d:["bes","num"],c:["proba"],t:["esp","risk","mob"],y:["calc","deb"],o:["inge","meca"],k:"fiabilite avion panne securite redondance",
+ p:["Explique la différence entre composants en série et en parallèle (redondance).","Calcule la probabilité de panne d’un système à plusieurs capteurs.","Discute le niveau de risque acceptable pour un avion ou une centrale."],
+ n:"Sûreté de fonctionnement, architecture d’un système",n2:"Probabilités, indépendance, loi binomiale",x:"Arbre de probabilités d’un système avec capteurs redondants."},
+{s:"M",q:"Comment les courbes de Bézier permettent-elles de dessiner la carrosserie d’une voiture ?",d:["mod","mat"],c:["fonc","geo"],t:["mob","loisir"],y:["hist","conc"],o:["meca","inge"],k:"bezier courbe design carrosserie cao renault",
+ p:["Raconte l’histoire de Pierre Bézier, ingénieur chez Renault.","Construis une courbe à partir de points de contrôle et explique son équation.","Montre comment les logiciels de CAO utilisent ces courbes aujourd’hui."],
+ n:"CAO, modélisation géométrique",n2:"Fonctions polynômes, géométrie, barycentres",x:"Courbe tracée dans un logiciel de CAO et la même calculée en Python."},
+{s:"M",q:"Comment un GPS calcule-t-il notre position ?",d:["num","ele"],c:["geo","algo"],t:["com","mob","esp"],y:["calc","hist"],o:["info","inge"],k:"gps geolocalisation satellite position telephone",
+ p:["Explique la mesure de distance à partir du temps de trajet du signal.","Montre géométriquement pourquoi il faut au moins quatre satellites.","Discute la précision et les erreurs possibles."],
+ n:"Transmission de l’information, mesure du temps",n2:"Géométrie dans l’espace, sphères, systèmes d’équations",x:"Trilatération en 2D réalisée sur un plan ou en Python."},
+{s:"M",q:"Comment compresser une image ou un son sans perte visible de qualité ?",d:["num"],c:["fonc","algo"],t:["com","loisir"],y:["calc","exp"],o:["info"],k:"compression image son mp3 jpeg video streaming",
+ p:["Explique la numérisation : échantillonnage, quantification, taille d’un fichier.","Compare compression sans perte et avec perte.","Montre ce que l’œil ou l’oreille ne perçoit pas et comment on en profite."],
+ n:"Numérisation, codage de l’information",n2:"Fonctions, algorithmique",x:"Programme Python qui réduit une image et calcule le gain de taille."},
+{s:"M",q:"Pourquoi l’échauffement d’un moteur électrique suit-il une loi exponentielle ?",d:["nrj","mod"],c:["eqdiff","fonc"],t:["ener","mob"],y:["calc","exp"],o:["inge","elec","ener"],k:"moteur echauffement temperature refroidissement",
+ p:["Relève l’évolution de la température d’un moteur en fonctionnement.","Modélise l’échauffement par une équation différentielle et résous-la.","Montre comment ce modèle sert à éviter la surchauffe."],
+ n:"Pertes, rendement, modélisation thermique",n2:"Équations différentielles, exponentielle, limites",x:"Courbe de température mesurée et superposée à la courbe modèle."},
+{s:"M",q:"Comment optimiser la forme d’un emballage pour économiser la matière ?",d:["mat","mod"],c:["fonc"],t:["env"],y:["calc","conc"],o:["inge","com"],k:"canette emballage bouteille optimisation forme",
+ p:["Exprime la surface d’une canette en fonction de son rayon à volume fixé.","Cherche le minimum par dérivation et compare aux vraies canettes.","Explique pourquoi les industriels s’écartent de l’optimum mathématique."],
+ n:"Éco-conception, choix de matériaux",n2:"Dérivation, variations, optimisation",x:"Tableau de mesures de vraies canettes comparées à l’optimum calculé."},
+
+{s:"P",q:"Comment un panneau photovoltaïque convertit-il la lumière en électricité ?",d:["nrj","ele"],c:["lumiere","elec"],t:["ener","env"],y:["exp","calc"],o:["ener","elec"],k:"panneau solaire photovoltaique lumiere",l:1,
+ p:["Explique l’effet photovoltaïque à partir du photon et de son énergie.","Trace la caractéristique courant-tension d’un panneau et repère le point de puissance maximale.","Calcule le rendement et compare-le à l’ensoleillement de Mayotte."],
+ n:"Conversion d’énergie, rendement, caractéristique I-U",n2:"Photon, énergie lumineuse, puissance électrique",x:"Relevé de la caractéristique d’un petit panneau sous une lampe."},
+{s:"P",q:"Comment un radar de recul ou un sonar mesure-t-il une distance ?",d:["ele","num"],c:["ondes"],t:["mob","mer"],y:["exp","calc"],o:["elec","info"],k:"sonar radar ultrason distance recul",
+ p:["Explique la mesure du temps d’aller-retour d’une onde.","Compare ultrasons, ondes radio et lumière pour mesurer une distance.","Discute la précision et l’influence de la température sur la vitesse du son."],
+ n:"Capteurs, chaîne d’information",n2:"Ondes, célérité, réflexion",x:"Capteur à ultrasons sur une carte programmable, mesure comparée à un mètre."},
+{s:"P",q:"Pourquoi les véhicules électriques récupèrent-ils de l’énergie au freinage ?",d:["nrj","aut"],c:["meca","elec"],t:["mob","ener"],y:["calc","exp"],o:["ener","meca","elec"],k:"freinage recuperation voiture electrique energie cinetique",
+ p:["Calcule l’énergie cinétique d’un véhicule et ce qu’elle devient au freinage classique.","Explique comment le moteur devient générateur.","Estime le gain réel d’autonomie en ville."],
+ n:"Réversibilité d’une chaîne de puissance, rendement",n2:"Énergie cinétique, théorème de l’énergie cinétique",x:"Moteur entraîné à la main qui allume une LED ou charge un condensateur."},
+{s:"P",q:"Comment une batterie lithium-ion stocke-t-elle l’énergie, et pourquoi s’use-t-elle ?",d:["nrj","mat"],c:["chimie","elec"],t:["ener","com","env"],y:["calc","deb"],o:["ener","inge"],k:"batterie lithium telephone usure recharge",
+ p:["Explique les réactions d’oxydoréduction lors de la charge et de la décharge.","Identifie les causes de vieillissement : cycles, température, charge rapide.","Discute l’extraction du lithium et le recyclage."],
+ n:"Stockage d’énergie, capacité, gestion de batterie",n2:"Oxydoréduction, piles, quantité d’électricité",x:"Courbe de décharge d’une batterie ou d’une pile mesurée sur une résistance."},
+{s:"P",q:"L’hydrogène peut-il remplacer l’essence pour faire rouler les véhicules ?",d:["nrj"],c:["chimie","thermo"],t:["mob","ener","env"],y:["calc","deb"],o:["ener","inge"],k:"hydrogene pile combustible voiture bus",
+ p:["Explique le fonctionnement d’une pile à combustible.","Calcule le rendement de la chaîne complète : électrolyse, stockage, pile.","Compare avec la batterie et discute l’origine de l’hydrogène."],
+ n:"Chaîne d’énergie, rendement global",n2:"Électrolyse, oxydoréduction, énergie",x:"Électrolyse de l’eau et petite pile à combustible pédagogique."},
+{s:"P",q:"Comment garder une maison fraîche sous un climat tropical sans climatisation ?",d:["mat","nrj","mod"],c:["thermo"],t:["hab","env"],y:["calc","exp","conc"],o:["btp","ener"],k:"maison climatisation chaleur isolation tropical bioclimatique",l:1,
+ p:["Identifie les apports de chaleur : rayonnement sur le toit, murs, ventilation.","Compare des solutions : isolation de toiture, ventilation traversante, débords de toit.","Relie la question à l’architecture traditionnelle de Mayotte."],
+ n:"Bilan énergétique, choix de matériaux, simulation thermique",n2:"Transferts thermiques, résistance thermique",x:"Deux maquettes sous une lampe, avec et sans isolation, et mesure de température."},
+{s:"P",q:"Comment un avion vole-t-il, et comment réduire sa consommation de carburant ?",d:["mec","mod","nrj"],c:["fluide","meca"],t:["esp","mob"],y:["calc","hist"],o:["meca","inge"],k:"avion aile portance aeronautique kerosene",
+ p:["Explique l’origine de la portance et de la traînée sur une aile.","Montre comment la forme des ailes (winglets) réduit la traînée.","Compare les pistes d’avenir : allègement, carburants durables, avion électrique."],
+ n:"Actions mécaniques, simulation de fluide, rendement",n2:"Mécanique des fluides, lois de Newton",x:"Profil d’aile devant un ventilateur, posé sur une balance."},
+{s:"P",q:"Comment un casque à réduction de bruit active supprime-t-il le son ?",d:["ele","num","aut"],c:["ondes"],t:["loisir","sante"],y:["exp","calc"],o:["elec","sante"],k:"casque bruit son ecouteurs musique",
+ p:["Explique le principe d’interférences destructives.","Décris la chaîne : micro, traitement, haut-parleur, et le problème du délai.","Discute l’intérêt pour la santé auditive."],
+ n:"Chaîne d’information, traitement du signal, boucle de contre-réaction",n2:"Ondes sonores, interférences, déphasage",x:"Deux haut-parleurs en opposition de phase et mesure au sonomètre."},
+{s:"P",q:"Pourquoi un satellite géostationnaire reste-t-il au-dessus du même point de la Terre ?",d:["mec","num"],c:["meca"],t:["esp","com"],y:["calc","hist"],o:["meca","inge"],k:"satellite orbite geostationnaire television internet",
+ p:["Applique les lois de Newton pour calculer l’altitude de l’orbite géostationnaire.","Explique les usages : télévision, météo, internet.","Montre comment le satellite corrige sa position au cours de sa vie."],
+ n:"Dynamique, transmission de l’information",n2:"Lois de Newton, mouvement circulaire, gravitation",x:"Calcul de l’altitude et animation de l’orbite en Python."},
+
+{s:"N",q:"Comment un robot livreur trouve-t-il le plus court chemin ?",d:["num","aut"],c:["graphes","prog"],t:["rob","mob"],y:["calc","exp"],o:["info","elec"],k:"robot livraison chemin algorithme dijkstra",
+ p:["Modélise un quartier par un graphe pondéré.","Explique l’algorithme de Dijkstra et teste-le sur un exemple.","Discute ce que l’algorithme ignore : obstacles imprévus, piétons, pente."],
+ n:"Chaîne d’information, commande d’un robot",n2:"Graphes, algorithmes de plus court chemin",x:"Programme Python qui calcule un trajet sur un plan du lycée."},
+{s:"N",q:"Comment protéger un objet connecté contre le piratage ?",d:["num","ele"],c:["secu","reseaux"],t:["com","hab","risk"],y:["deb","exp"],o:["info"],k:"piratage hacker cybersecurite objet connecte camera",
+ p:["Recense les failles classiques : mot de passe par défaut, mises à jour absentes.","Explique le chiffrement des échanges entre l’objet et le serveur.","Discute les conséquences d’une attaque sur une maison ou un hôpital."],
+ n:"Communication entre objets, protocoles",n2:"Chiffrement, sécurisation des communications",x:"Analyse de trames entre deux cartes, en clair puis chiffrées."},
+{s:"N",q:"Comment les véhicules connectés échangent-ils des données en temps réel ?",d:["num"],c:["reseaux","archi"],t:["mob","com"],y:["calc","deb"],o:["info","elec"],k:"voiture connectee 5g reseau trafic",
+ p:["Explique pourquoi le temps de transmission est critique sur la route.","Compare les réseaux utilisés et leurs latences.","Discute la protection de la vie privée des conducteurs."],
+ n:"Transmission de l’information, architecture de réseau",n2:"Protocoles réseau, routage",x:"Mesure de latence entre deux cartes communicantes."},
+{s:"N",q:"Comment un microcontrôleur gère-t-il plusieurs tâches en même temps ?",d:["num","ele"],c:["archi","prog"],t:["rob"],y:["exp","conc"],o:["info","elec"],k:"microcontroleur arduino esp32 programmation multitache",
+ p:["Explique la différence entre exécution séquentielle et interruptions.","Montre ce qui se passe quand une tâche bloque les autres.","Conçois un programme qui lit un capteur et pilote un moteur sans à-coups."],
+ n:"Programmation de microcontrôleur, chaîne d’information",n2:"Architecture, processus, ordonnancement",x:"Carte qui fait clignoter une LED tout en lisant un capteur, avec puis sans interruptions."},
+{s:"N",q:"Peut-on faire confiance à une IA qui reconnaît des objets ?",d:["num"],c:["prog","bdd"],t:["rob","env"],y:["deb","exp"],o:["info"],k:"ia intelligence artificielle vision reconnaissance biais",
+ p:["Explique l’apprentissage à partir d’une base d’images étiquetées.","Mesure le taux d’erreur et montre l’effet d’une base d’images biaisée.","Discute les usages sensibles : surveillance, voiture autonome, médecine."],
+ n:"Traitement de l’information, capteur caméra",n2:"Données, algorithmes d’apprentissage",x:"Modèle de reconnaissance entraîné en classe, testé sur de nouvelles images."},
+{s:"N",q:"Comment un jumeau numérique permet-il d’anticiper les pannes d’une machine ?",d:["num","mod"],c:["bdd","reseaux"],t:["rob","ener"],y:["calc","conc"],o:["info","inge","meca"],k:"jumeau numerique maintenance usine capteur panne",
+ p:["Définis le jumeau numérique : modèle relié en permanence au système réel.","Explique la collecte et le stockage des données des capteurs.","Montre comment un écart entre modèle et mesure annonce une panne."],
+ n:"Modélisation, écarts mesuré / simulé",n2:"Bases de données, réseaux",x:"Base de données de mesures d’un moteur, avec détection d’une dérive."},
+{s:"N",q:"Comment un système d’alerte peut-il prévenir rapidement la population d’un cyclone ou d’un tsunami ?",d:["num","ele"],c:["reseaux","bdd"],t:["risk","com"],y:["conc","deb"],o:["info","elec"],k:"alerte cyclone tsunami sirene telephone population",l:1,
+ p:["Décris la chaîne : capteurs, centre de décision, diffusion du message.","Compare sirènes, SMS, radio et réseaux sociaux quand le réseau électrique est coupé.","Tire des leçons de la gestion du cyclone Chido à Mayotte."],
+ n:"Chaîne d’information, fiabilité, autonomie énergétique",n2:"Réseaux, protocoles, données",x:"Prototype d’alerte déclenchée par un capteur et diffusée à plusieurs cartes."},
+{s:"N",q:"Pourquoi le numérique consomme-t-il autant d’énergie, et comment réduire cette consommation ?",d:["nrj","num"],c:["reseaux","archi"],t:["env","com"],y:["deb","calc"],o:["info","ener"],k:"numerique energie data center streaming",
+ p:["Répartis la consommation entre terminaux, réseaux et centres de données.","Chiffre l’énergie d’une heure de vidéo en ligne selon la qualité.","Propose des leviers techniques et des changements d’usage."],
+ n:"Bilan énergétique, efficacité",n2:"Architecture des réseaux, données",x:"Mesure de la consommation d’un ordinateur selon la tâche réalisée."},
+
+{s:"S",q:"Comment un pancréas artificiel régule-t-il la glycémie d’une personne diabétique ?",d:["aut","ele"],c:["corps"],t:["sante"],y:["calc","deb"],o:["sante","elec","inge"],k:"diabete insuline glycemie pompe pancreas",
+ p:["Explique la régulation naturelle de la glycémie par l’insuline.","Décris la boucle artificielle : capteur de glucose, algorithme, pompe à insuline.","Compare les deux boucles et discute les risques en cas d’erreur."],
+ n:"Asservissement, capteur, actionneur",n2:"Régulation de la glycémie, hormones",x:"Schéma comparé des deux boucles de régulation."},
+{s:"S",q:"Comment une prothèse bionique peut-elle être commandée par les muscles ?",d:["ele","num","mec"],c:["neuro","corps"],t:["sante","rob"],y:["exp","conc"],o:["sante","elec","inge"],k:"prothese bionique muscle emg bras amputation",
+ p:["Explique l’origine du signal électrique d’un muscle.","Décris la chaîne : électrodes, amplification, traitement, moteur.","Discute le coût et l’accès à ces prothèses."],
+ n:"Capteurs, conditionnement du signal, commande d’actionneur",n2:"Commande nerveuse du mouvement, muscle",x:"Capteur de signal musculaire qui pilote un servomoteur."},
+{s:"S",q:"Comment une montre connectée mesure-t-elle le rythme cardiaque ?",d:["ele","num"],c:["corps"],t:["sante","sport"],y:["exp","calc"],o:["sante","elec"],k:"montre connectee coeur cardiaque frequence sport",
+ p:["Explique le principe optique : la lumière absorbée par le sang.","Montre comment le traitement du signal élimine les mouvements parasites.","Discute la fiabilité et l’usage médical des données."],
+ n:"Capteurs optiques, traitement du signal",n2:"Fonctionnement du cœur, effort physique",x:"Capteur de pouls sur une carte, comparé à une mesure manuelle."},
+{s:"S",q:"Comment la technologie peut-elle aider à protéger les récifs coralliens ?",d:["ele","num","bes"],c:["ecosys","climat"],t:["mer","env"],y:["deb","conc"],o:["ener","inge"],k:"corail recif lagon blanchissement ocean",l:1,
+ p:["Explique le blanchissement des coraux et ses causes.","Présente des outils : sondes de température, drones, récifs artificiels imprimés en 3D.","Discute les limites : la technique suffit-elle sans réduire les causes ?"],
+ n:"Capteurs, cahier des charges, éco-conception",n2:"Écosystèmes, biodiversité, réchauffement",x:"Sonde de température immergée et enregistrement des données."},
+{s:"S",q:"Comment une serre automatisée optimise-t-elle la croissance des plantes ?",d:["aut","num","nrj"],c:["agri","ecosys"],t:["eau","env"],y:["exp","conc"],o:["ener","elec"],k:"serre plante arrosage agriculture culture",l:1,
+ p:["Identifie les besoins de la plante : lumière, eau, température.","Conçois la régulation de l’arrosage selon l’humidité du sol.","Calcule l’eau économisée par rapport à un arrosage classique."],
+ n:"Régulation, capteurs, chaîne d’information",n2:"Photosynthèse, besoins des végétaux",x:"Mini-serre avec capteur d’humidité et pompe pilotée."},
+{s:"S",q:"Peut-on capter le CO₂ de l’atmosphère avec des machines ?",d:["nrj","bes"],c:["climat"],t:["env"],y:["deb","calc"],o:["ener","inge"],k:"co2 carbone climat capture rechauffement",
+ p:["Explique le rôle du CO₂ dans l’effet de serre et le cycle du carbone.","Décris une installation de captage et l’énergie qu’elle consomme.","Compare avec les puits naturels comme les forêts et les mangroves."],
+ n:"Bilan énergétique, analyse de cycle de vie",n2:"Cycle du carbone, climat",x:"Bilan chiffré : CO₂ capté comparé au CO₂ émis pour faire fonctionner la machine."},
+{s:"S",q:"Comment un cœur artificiel peut-il remplacer un cœur humain ?",d:["mec","nrj","aut"],c:["corps"],t:["sante"],y:["calc","hist"],o:["sante","inge"],k:"coeur artificiel carmat pompe sang",
+ p:["Décris le cœur comme une pompe : débit, pression, fréquence.","Explique les solutions techniques d’un cœur artificiel et leur alimentation.","Discute les contraintes : biocompatibilité, autonomie, fiabilité."],
+ n:"Chaîne de puissance, mécanique des fluides, régulation",n2:"Circulation sanguine, physiologie de l’effort",x:"Pompe pilotée dont le débit varie selon une consigne d’effort."},
+
+{s:"E",q:"La robotisation détruit-elle des emplois ou en crée-t-elle ?",d:["aut","num"],c:["travail","innov"],t:["rob"],y:["deb","hist"],o:["com","inge"],k:"robot emploi travail usine automatisation",
+ p:["Décris ce qu’un robot industriel sait faire et ce qu’il ne sait pas faire.","Mobilise la notion de destruction créatrice et des données sur l’emploi.","Montre les nouveaux métiers créés : maintenance, programmation, intégration."],
+ n:"Systèmes automatisés, robotique",n2:"Innovation, emploi, mutations du travail",x:"Exemple chiffré d’une usine avant et après robotisation."},
+{s:"E",q:"Comment l’innovation technologique contribue-t-elle à la croissance économique ?",d:["bes"],c:["innov","marche"],t:["com","ener"],y:["hist","deb"],o:["com","inge"],k:"innovation croissance brevet entreprise startup",
+ p:["Choisis une innovation précise (smartphone, LED, batterie) et retrace son histoire.","Explique le rôle des brevets et de la recherche.","Montre ses effets sur la productivité et sur de nouveaux marchés."],
+ n:"Démarche d’innovation, cycle de vie d’un produit",n2:"Croissance, progrès technique, innovation",x:"Frise d’évolution d’un produit avec ses ruptures techniques."},
+{s:"E",q:"La voiture électrique est-elle accessible à tous ?",d:["nrj","bes"],c:["inegal","envpol"],t:["mob","env"],y:["deb","calc"],o:["com","ener"],k:"voiture electrique prix bonus ecologique",
+ p:["Compare le coût d’achat et le coût d’usage avec une voiture thermique.","Analyse les aides publiques et qui en bénéficie vraiment.","Propose des solutions techniques moins chères : petits véhicules, deux-roues, rétrofit."],
+ n:"Chaîne de puissance, analyse du besoin",n2:"Inégalités, politiques environnementales",x:"Calcul du coût total sur cinq ans pour deux véhicules."},
+{s:"E",q:"L’obsolescence programmée existe-t-elle vraiment ?",d:["mat","bes"],c:["marche","envpol"],t:["env","com"],y:["deb","exp"],o:["com","inge"],k:"obsolescence programmee panne imprimante telephone",
+ p:["Distingue obsolescence technique, logicielle et esthétique.","Analyse un objet réel et ses points faibles de conception.","Discute la réglementation et l’intérêt économique des fabricants."],
+ n:"Fiabilité, éco-conception, choix de matériaux",n2:"Marché, stratégies des entreprises",x:"Démontage d’un objet en panne et identification de la pièce fragile."},
+{s:"E",q:"Faut-il donner un prix au carbone pour accélérer la transition énergétique ?",d:["nrj"],c:["envpol"],t:["ener","env"],y:["deb","calc"],o:["com","ener"],k:"taxe carbone climat energie",
+ p:["Chiffre les émissions de deux solutions techniques pour un même besoin.","Explique comment une taxe carbone modifie leur coût relatif.","Discute l’acceptabilité sociale et les effets sur les ménages."],
+ n:"Bilan énergétique, analyse de cycle de vie",n2:"Instruments des politiques climatiques",x:"Tableau coût et émissions pour deux solutions de production d’électricité."},
+{s:"E",q:"Pourquoi l’électricité coûte-t-elle plus cher à produire sur une île comme Mayotte ?",d:["nrj"],c:["marche","inegal"],t:["ener"],y:["calc","deb"],o:["com","ener"],k:"electricite prix ile mayotte fioul",l:1,
+ p:["Décris le mix électrique de Mayotte et son coût de production.","Explique le mécanisme de péréquation qui aligne les tarifs sur la métropole.","Analyse ce que le solaire et le stockage pourraient changer."],
+ n:"Production d’énergie, rendement, stockage",n2:"Coûts de production, action publique",x:"Comparaison chiffrée du coût du kWh selon la source."},
+
+{s:"H",q:"Pourquoi la conquête spatiale est-elle redevenue un enjeu de puissance ?",d:["mec","nrj"],c:["espace","geopol"],t:["esp"],y:["hist","deb"],o:["meca","inge"],k:"espace fusee spacex ariane lune mars",
+ p:["Retrace la course à l’espace, de la guerre froide aux entreprises privées.","Explique une innovation clé : la fusée réutilisable.","Discute les enjeux : satellites, débris spatiaux, souveraineté européenne."],
+ n:"Dynamique, chaîne de puissance, innovation",n2:"Nouveaux espaces de conquête, puissances",x:"Schéma d’un lanceur réutilisable et de ses phases de vol."},
+{s:"H",q:"Comment les câbles sous-marins sont-ils devenus un enjeu géopolitique ?",d:["num"],c:["geopol","connaissance"],t:["com","mer"],y:["hist","deb"],o:["info","com"],k:"cable sous marin internet fibre optique",
+ p:["Explique la transmission par fibre optique et son débit.","Montre sur une carte la concentration des câbles et des points d’arrivée.","Discute les risques : coupure accidentelle, espionnage, sabotage."],
+ n:"Transmission de l’information, fibre optique",n2:"Puissances, cyberespace, océans",x:"Carte commentée des câbles reliant Mayotte et l’océan Indien."},
+{s:"H",q:"Comment le numérique permet-il de préserver un patrimoine ?",d:["mod","num"],c:["patrimoine"],t:["loisir"],y:["conc","hist"],o:["btp","info"],k:"patrimoine numerisation 3d monument notre dame",
+ p:["Explique la numérisation 3D : photogrammétrie, scanner laser.","Prends l’exemple de la reconstruction de Notre-Dame de Paris.","Propose de numériser un élément du patrimoine local."],
+ n:"Modélisation 3D, acquisition de données",n2:"Patrimoine, mémoire, transmission",x:"Modèle 3D d’un objet réalisé par photogrammétrie avec un téléphone."},
+{s:"H",q:"Les drones ont-ils changé la manière de faire la guerre ?",d:["aut","num"],c:["guerre","geopol"],t:["esp","rob"],y:["deb","hist"],o:["meca","info"],k:"drone guerre militaire ukraine",
+ p:["Décris les caractéristiques techniques d’un drone : autonomie, portée, guidage.","Analyse comment des drones bon marché bouleversent les rapports de force.","Discute les questions éthiques de l’autonomie des armes."],
+ n:"Asservissement, transmission, autonomie énergétique",n2:"Faire la guerre, rapports de puissance",x:"Bilan d’autonomie d’un drone selon sa masse et sa batterie."},
+{s:"H",q:"La dépendance aux métaux rares freine-t-elle la transition énergétique ?",d:["mat","nrj"],c:["geopol","env"],t:["ener","env"],y:["deb","calc"],o:["ener","com"],k:"metaux rares terres rares lithium cobalt",
+ p:["Identifie les métaux présents dans un moteur électrique, un panneau, une batterie.","Montre la concentration géographique de leur production.","Présente des solutions techniques : moteurs sans aimants, recyclage."],
+ n:"Choix de matériaux, conversion d’énergie",n2:"Ressources, rivalités de puissance",x:"Démontage d’un petit moteur et identification de ses aimants."},
+{s:"H",q:"Pourquoi la cybersécurité est-elle devenue un enjeu de souveraineté ?",d:["num"],c:["connaissance","guerre"],t:["com","risk"],y:["deb","hist"],o:["info"],k:"cyberattaque hacker hopital souverainete",
+ p:["Explique les attaques classiques : rançongiciels, déni de service.","Prends l’exemple d’une attaque contre un hôpital ou une infrastructure.","Discute la protection des systèmes industriels."],
+ n:"Réseaux, sécurité des systèmes communicants",n2:"Cyberespace, conflictualité",x:"Schéma d’une architecture de réseau avec ses points de vulnérabilité."},
+
+{s:"A",q:"Comment la Silicon Valley est-elle devenue le centre mondial de l’innovation technologique ?",d:["bes","num"],c:["innov"],t:["com"],y:["hist","deb"],o:["info","com"],k:"silicon valley apple google startup",
+ p:["Retrace l’histoire, des premiers semi-conducteurs aux géants du numérique.","Analyse une innovation précise et ses choix de conception.","Une partie de l’exposé peut se faire en anglais : prépare le vocabulaire technique."],
+ n:"Démarche d’innovation, cycle de vie d’un produit",n2:"Innovation dans le monde anglophone",x:"Frise chronologique bilingue des grandes innovations."},
+{s:"A",q:"Comment la science-fiction anglophone façonne-t-elle notre vision des robots ?",d:["aut","num"],c:["fiction"],t:["rob"],y:["deb","hist"],o:["info","elec"],k:"robot science fiction asimov terminator film",
+ p:["Compare les lois de la robotique d’Asimov aux règles de sécurité des robots réels.","Analyse un film ou un roman et ce qu’il dit de nos peurs.","Montre ce que les robots savent vraiment faire aujourd’hui."],
+ n:"Robotique, sécurité, autonomie",n2:"Science-fiction, représentations",x:"Comparaison entre un robot de fiction et un robot industriel réel."},
+{s:"A",q:"Comment les entrepreneurs de la tech ont-ils changé l’image de l’ingénieur ?",d:["bes"],c:["innov","media"],t:["esp","mob"],y:["hist","deb"],o:["inge","com"],k:"elon musk tesla spacex ingenieur",
+ p:["Analyse la communication d’une entreprise comme SpaceX ou Tesla.","Distingue les vraies avancées techniques et le discours médiatique.","Discute le rôle des équipes d’ingénieurs derrière les figures célèbres."],
+ n:"Innovation, démarche de projet",n2:"Médias, innovation dans le monde anglophone",x:"Étude d’une innovation présentée en anglais par l’entreprise."},
+{s:"A",q:"Comment le Royaume-Uni est-il devenu un leader de l’éolien en mer ?",d:["nrj"],c:["env","innov"],t:["ener","mer"],y:["hist","calc"],o:["ener"],k:"eolien mer offshore royaume uni",
+ p:["Explique pourquoi le vent en mer est plus régulier et plus fort.","Décris les solutions techniques : fondations, éoliennes flottantes, raccordement.","Analyse la politique énergétique britannique et ses résultats."],
+ n:"Conversion d’énergie, puissance du vent",n2:"Environnement en débat, innovation",x:"Calcul de la production annuelle d’un parc éolien."},
+
+{s:"L",q:"Un humain réparé ou augmenté par la technique reste-t-il pleinement humain ?",d:["ele","mec"],c:["humain","ethique"],t:["sante","rob"],y:["deb"],o:["sante","ens"],k:"homme augmente transhumanisme prothese implant",
+ p:["Distingue réparer (prothèse) et augmenter (exosquelette, implant).","Appuie-toi sur un dispositif technique précis et explique son fonctionnement.","Mobilise les textes de philosophie sur les limites de l’humain."],
+ n:"Capteurs, actionneurs, chaîne d’information",n2:"Les limites de l’humain, la technique",x:"Présentation d’une prothèse réelle et de sa chaîne de commande."},
+{s:"L",q:"Peut-on confier une décision morale à une machine ?",d:["num","aut"],c:["ethique"],t:["mob","rob"],y:["deb"],o:["info","ens"],k:"voiture autonome dilemme morale decision ia",
+ p:["Présente le dilemme du tramway appliqué à la voiture autonome.","Explique comment un programme prend une décision.","Discute la responsabilité : concepteur, utilisateur ou machine ?"],
+ n:"Algorithme de décision, chaîne d’information",n2:"Morale, responsabilité",x:"Algorithme simple de décision et ses cas limites."},
+{s:"L",q:"La technique nous libère-t-elle ou nous rend-elle dépendants ?",d:["num","bes"],c:["techn"],t:["com"],y:["deb","hist"],o:["ens","com"],k:"technique dependance telephone ecran liberte",
+ p:["Choisis un objet technique du quotidien et analyse le besoin auquel il répond.","Montre ce qu’il nous a permis de faire et ce que nous ne savons plus faire sans lui.","Mobilise les philosophes de la technique."],
+ n:"Analyse du besoin, fonctions d’un produit",n2:"Création et technique",x:"Analyse fonctionnelle d’un objet du quotidien."},
+{s:"L",q:"Un objet technique bien conçu peut-il être beau ?",d:["bes","mat"],c:["techn"],t:["loisir"],y:["deb","conc"],o:["btp","inge"],k:"design beaute objet architecture",
+ p:["Analyse un objet célèbre pour son design et ses choix techniques.","Discute l’idée que la forme suit la fonction.","Propose un objet que tu as conçu et ce qui le rend beau à tes yeux."],
+ n:"Design, cahier des charges, choix de matériaux",n2:"Création, esthétique",x:"Modèle CAO d’un objet dont la forme répond à une fonction."}
+];
+
+/* ---------- État ---------- */
+const KEY="boussole-grand-oral-si-v1";
+const blank=()=>({name:"",spe:"",or:"",pref:"both",local:true,dom:{},th:[],sty:[],kw:"",other:{spe:"",or:"",th:"",sty:"",ch:""},ch:[],keep:[],sys:"",g:"m",angle:"perf",myq:"",checks:[],step:0,tab:null});
+let S=blank();
+try{const raw=localStorage.getItem(KEY);if(raw){S=Object.assign(blank(),JSON.parse(raw));S.other=Object.assign(blank().other,S.other);}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}};
+let showAll=false;
+
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=t=>String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+Q.forEach((q,i)=>{const n=Q.slice(0,i+1).filter(x=>x.s===q.s).length;q.ref=(q.s==="SI"?"SI":"SI×"+SPE[q.s].s)+"-"+String(n).padStart(2,"0");q.id=i;});
+const domL=Object.fromEntries(DOMS.map(d=>[d.id,d.l]));
+const thL=Object.fromEntries(THEMES);
+const styL=Object.fromEntries(STYLES);
+
+/* ---------- Construction des formulaires ---------- */
+const STEPS=["Profil","Connaissances SI","Centres d’intérêt","2ᵉ spécialité","Pistes"];
+function buildStatic(){
+  $("#steps").innerHTML=STEPS.map((l,i)=>`<button type="button" data-go="${i}"><span class="n">0${i+1}</span><span class="l">${l}</span></button>`).join("");
+  $("#f-or").innerHTML=ORIENT.map(o=>`<option value="${o[0]}">${esc(o[1])}</option>`).join("");
+  $("#spe-grid").innerHTML=Object.entries(SPE).map(([k,v])=>`<div class="opt"><input type="radio" name="spe" id="spe-${k}" value="${k}"><label for="spe-${k}"><b>${esc(v.l)}</b><small>${v.ch.length?Q.filter(q=>q.s===k).length+" questions croisées":"Questions SI uniquement"}</small></label></div>`).join("");
+  $("#pref").innerHTML=[["si","100 % SI"],["tr","Transversale"],["both","Les deux"]].map(([v,l])=>`<span class="chip"><input type="radio" name="pref" id="pref-${v}" value="${v}"><label for="pref-${v}">${l}</label></span>`).join("");
+  $("#rates").innerHTML=DOMS.map(d=>`<div class="rate"><div class="what"><b id="lab-${d.id}">${esc(d.l)}</b><span>${esc(d.h)}</span></div>
+    <div class="seg" role="radiogroup" aria-labelledby="lab-${d.id}">${[1,2,3,4].map(n=>`<input type="radio" name="dom-${d.id}" id="dom-${d.id}-${n}" value="${n}"><label for="dom-${d.id}-${n}">${n}</label>`).join("")}</div></div>`).join("");
+  $("#themes").innerHTML=THEMES.map(([v,l])=>`<span class="chip"><input type="checkbox" id="th-${v}" value="${v}" data-list="th"><label for="th-${v}">${esc(l)}</label></span>`).join("")+otherChip("th");
+  $("#styles").innerHTML=STYLES.map(([v,l])=>`<span class="chip"><input type="checkbox" id="sty-${v}" value="${v}" data-list="sty"><label for="sty-${v}">${esc(l)}</label></span>`).join("")+otherChip("sty");
+  $("#fg-angle").innerHTML=ANGLES.map(a=>`<option value="${a[0]}">${esc(a[1])}</option>`).join("");
+  $("#checks").innerHTML=CHECKS.map((c,i)=>`<li><input type="checkbox" id="ck-${i}" data-ck="${i}"><label for="ck-${i}">${esc(c)}</label></li>`).join("");
+}
+function buildChapters(){
+  const sp=SPE[S.spe];
+  $("#ch-title").textContent=sp?"Ce que tu aimes en "+speName():"Ta deuxième spécialité";
+  if(!sp){$("#chapters").innerHTML=`<p class="empty">Choisis d’abord ta deuxième spécialité à l’étape 1.</p>`;return;}
+  if(!sp.ch.length){$("#chapters").innerHTML=`<p class="empty">Pour cette spécialité, la boussole propose des questions 100 % SI. Ton professeur peut t’aider à trouver un croisement.</p>`;return;}
+  $("#chapters").innerHTML=sp.ch.map(([v,l])=>`<span class="chip"><input type="checkbox" id="ch-${v}" value="${v}" data-list="ch" ${S.ch.includes(v)?"checked":""}><label for="ch-${v}">${esc(l)}</label></span>`).join("")+otherChip("ch",S.ch.includes("autre"));
+}
+function fillForm(){
+  $("#f-name").value=S.name;$("#f-or").value=S.or;$("#f-kw").value=S.kw;$("#f-local").checked=S.local;
+  document.querySelectorAll('input[name="spe"]').forEach(i=>i.checked=i.value===S.spe);
+  document.querySelectorAll('input[name="pref"]').forEach(i=>i.checked=i.value===S.pref);
+  DOMS.forEach(d=>document.querySelectorAll(`input[name="dom-${d.id}"]`).forEach(i=>i.checked=+i.value===S.dom[d.id]));
+  document.querySelectorAll('input[data-list="th"]').forEach(i=>i.checked=S.th.includes(i.value));
+  document.querySelectorAll('input[data-list="sty"]').forEach(i=>i.checked=S.sty.includes(i.value));
+  $("#fg-sys").value=S.sys;$("#fg-g").value=S.g;$("#fg-angle").value=S.angle;$("#f-myq").value=S.myq;
+  document.querySelectorAll("[data-ck]").forEach(i=>i.checked=S.checks.includes(+i.dataset.ck));
+  document.querySelectorAll("[data-other]").forEach(i=>i.value=S.other[i.dataset.other]||"");
+  syncOther();
+}
+function otherChip(list,on){return `<span class="chip"><input type="checkbox" id="${list}-autre" value="autre" data-list="${list}" ${on?"checked":""}><label for="${list}-autre">Autre…</label></span>`;}
+function syncOther(){
+  const vis={spe:S.spe==="X",or:S.or==="autre",th:S.th.includes("autre"),sty:S.sty.includes("autre"),ch:S.ch.includes("autre")&&!!(SPE[S.spe]&&SPE[S.spe].ch.length)};
+  Object.entries(vis).forEach(([k,v])=>{const el=$("#o-"+k);if(el)el.hidden=!v;});
+}
+const speName=()=>S.spe==="X"&&S.other.spe.trim()?S.other.spe.trim():(SPE[S.spe]||{l:""}).l;
+const orName=()=>S.or==="autre"&&S.other.or.trim()?S.other.or.trim():((ORIENT.find(o=>o[0]===S.or)||[,"à préciser"])[1]);
+const lab=(list,map,k)=>k==="autre"?(S.other[list].trim()||"Autre"):map[k];
+
+/* ---------- Moteur de suggestions ---------- */
+const STOP=new Set("avec dans pour mais plus tres aussi comme quoi sans sous elle elles nous vous leur leurs cette ces mon mes ton tes son ses une des les aux est sont etre faire fait projet aime adore passion".split(" "));
+function keywords(){return [...new Set(norm([S.kw,S.other.th,S.other.sty,S.other.ch].join(" ")).split(/[^a-z0-9]+/).filter(w=>w.length>=3&&!STOP.has(w)))];}
+function score(q){
+  let sc=1;const why=[],vig=[];
+  q.t.forEach(t=>{if(S.th.includes(t)){sc+=4;why.push(["",thL[t]]);}});
+  const r=q.d.map(d=>S.dom[d]||2);sc+=(r.reduce((a,b)=>a+b,0)/r.length-2)*1.6;
+  q.d.forEach(d=>{if(S.dom[d]>=3)why.push(["","Point fort : "+domL[d]]);if(S.dom[d]===1)vig.push(domL[d]);});
+  if(q.c&&SPE[q.s])q.c.forEach(c=>{if(S.ch.includes(c)){sc+=3;why.push(["",SPE[q.s].ch.find(x=>x[0]===c)[1]]);}});
+  q.y.forEach(y=>{if(S.sty.includes(y)){sc+=1.8;why.push(["",styL[y]]);}});
+  if(S.or&&q.o.includes(S.or)){sc+=2.2;why.push(["","Lien avec ton orientation"]);}
+  const hay=norm(q.q+" "+q.k);
+  keywords().forEach(w=>{if(new RegExp("\\b"+w).test(hay)){sc+=3.5;why.push(["kw","Rejoint « "+w+" »"]);}});
+  if(q.l){if(S.local){sc+=1.5;why.push(["loc","Ancrée à Mayotte"]);}else sc-=.5;}
+  return {q,sc,why,vig};
+}
+function ranked(kind){
+  const list=Q.filter(q=>kind==="SI"?q.s==="SI":q.s===S.spe).map(score).sort((a,b)=>b.sc-a.sc);
+  const max=list.length?list[0].sc:1;
+  list.forEach(r=>r.aff=Math.max(1,Math.min(5,Math.round(5*r.sc/max))));
+  return list;
+}
+
+/* ---------- Rendu des résultats ---------- */
+function tabsDef(){
+  const sp=SPE[S.spe],hasTr=sp&&sp.ch.length;
+  const t=[{id:"SI",l:"Questions 100 % SI"}];
+  if(hasTr){const tr={id:"TR",l:"Questions SI × "+sp.l};if(S.pref==="tr")t.unshift(tr);else t.push(tr);}
+  return t;
+}
+function renderResults(){
+  const sp=SPE[S.spe];const tabs=tabsDef();
+  if(!tabs.find(t=>t.id===S.tab))S.tab=tabs[0].id;
+  $("#res-title").textContent=S.name?"Tes pistes, "+S.name:"Tes pistes de questions";
+  const strong=DOMS.filter(d=>S.dom[d.id]>=3).map(d=>d.l);
+  $("#digest").innerHTML=`<div><span>Spécialités</span><b>SI${sp?" + "+esc(speName()):""}</b></div>
+   <div><span>Points forts SI</span><b>${strong.length?esc(strong.join(", ")):"à préciser"}</b></div>
+   <div><span>Intérêts</span><b>${S.th.length?esc(S.th.map(t=>lab("th",thL,t)).join(", ")):"aucun choisi"}</b></div>
+   <div><span>Orientation</span><b>${esc(orName())}</b></div>`;
+  const adv={si:"Tu préfères rester en SI : garde au moins une question 100 % SI. La seconde peut être transversale pour montrer l’étendue de tes connaissances.",
+    tr:"Tu aimes croiser les disciplines : une question transversale te permet de mobiliser tes deux spécialités. Vérifie que la partie SI reste solide, le jury l’attend.",
+    both:"Bonne stratégie : une question 100 % SI et une question transversale. Si le jury choisit l’une ou l’autre, tu montres deux facettes de ton profil."}[S.pref];
+  $("#advice").textContent=(sp&&!sp.ch.length)?"Pour ta deuxième spécialité, la boussole ne propose que des questions SI. Tu peux construire une question transversale avec l’atelier plus bas et ton professeur.":adv;
+  $("#tabs").innerHTML=tabs.map(t=>{const n=t.id==="SI"?Q.filter(q=>q.s==="SI").length:Q.filter(q=>q.s===S.spe).length;return `<button type="button" role="tab" id="tab-${t.id}" aria-selected="${t.id===S.tab}" data-tab="${t.id}">${esc(t.l)} <span class="count">${n}</span></button>`;}).join("");
+  $("#tabpanel").setAttribute("aria-labelledby","tab-"+S.tab);
+  const list=ranked(S.tab==="SI"?"SI":"TR");
+  const shown=showAll?list:list.slice(0,4);
+  $("#cards").innerHTML=shown.map((r,i)=>cardHTML(r,i===0)).join("")||`<p class="empty">Aucune question pour l’instant.</p>`;
+  $("#btn-more").hidden=list.length<=4;
+  $("#btn-more").textContent=showAll?"Afficher seulement les 4 meilleures":"Afficher les "+list.length+" questions";
+  renderTray();renderForge();renderOrient();
+}
+function cardHTML(r,open){
+  const q=r.q,tr=q.s!=="SI",kept=S.keep.includes(q.id);
+  const kind=tr?"SI × "+SPE[q.s].l:"100 % SI";
+  const why=r.why.length?r.why.slice(0,6).map(([c,t])=>`<span class="${c}">${esc(t)}</span>`).join(""):`<span>Piste à explorer</span>`;
+  return `<article class="card${tr?" tr":""}">
+   <div class="card-head"><span class="ref">${esc(q.ref)}</span><span class="kind">${esc(kind)}</span>
+    <span class="aff" title="Affinité ${r.aff} sur 5" aria-label="Affinité ${r.aff} sur 5">${[1,2,3,4,5].map(n=>`<i class="${n<=r.aff?"on":""}"></i>`).join("")}</span></div>
+   <div class="card-body">
+    <h3 class="card-q">${esc(q.q)}</h3>
+    <div class="why" aria-label="Pourquoi pour toi">${why}</div>
+    ${r.vig.length?`<p class="vig">À consolider avant l’oral : ${esc(r.vig.join(", "))}</p>`:""}
+    <details ${open?"open":""}><summary>Pistes de réflexion</summary>
+     <ul class="pistes">${q.p.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
+     <div class="notions"><div><b>Notions SI</b>${esc(q.n)}</div>${tr?`<div><b>Notions ${esc(SPE[q.s].l)}</b>${esc(q.n2)}</div>`:""}</div>
+     <p class="demo"><b>Support à montrer au jury</b>${esc(q.x)}</p>
+    </details>
+   </div>
+   <div class="card-foot"><button type="button" class="btn small keep" data-keep="${q.id}" aria-pressed="${kept}">${kept?"Gardée ✓":"Garder cette question"}</button></div>
+  </article>`;
+}
+function renderTray(){
+  const slots=[0,1].map(i=>{const id=S.keep[i];const q=Q[id];
+    if(q===undefined)return `<div class="slot vide"><span class="eyebrow">Question ${i+1}</span><p class="q">Choisis une question dans les pistes avec « Garder cette question ».</p></div>`;
+    return `<div class="slot"><span class="eyebrow">Question ${i+1} · ${esc(q.ref)}</span><p class="q">${esc(q.q)}</p>
+     <div class="acts"><button type="button" class="btn small" data-forge="${id}">Retravailler dans l’atelier</button><button type="button" class="btn small ghost" data-keep="${id}">Retirer</button></div></div>`;});
+  $("#tray").innerHTML=slots.join("");
+}
+function art(sys,g){
+  const v=/^[aeiouyhàâéèêîïôûœ]/i.test(sys);
+  return g==="f"?{le:v?"l’":"la ",Le:v?"L’":"La ",du:v?"de l’":"de la ",un:"une ",il:"elle",e:"e"}
+                :{le:v?"l’":"le ",Le:v?"L’":"Le ",du:v?"de l’":"du ",un:"un ",il:"il",e:""};
+}
+function renderForge(){
+  const sys=S.sys.trim();
+  if(!sys){$("#gen").innerHTML=`<li><span class="muted">Écris un système (par exemple « drone de livraison ») pour voir des formulations.</span></li>`;return;}
+  const a=art(sys,S.g),tpl=ANGLES.find(x=>x[0]===S.angle)[2];
+  const out=tpl.map(t=>t.replace(/\{Le\} \{sys\}/g,a.Le+sys).replace(/\{le\} \{sys\}/g,a.le+sys).replace(/\{du\} \{sys\}/g,a.du+sys).replace(/\{un\} \{sys\}/g,a.un+sys).replace(/\{il\}/g,a.il).replace(/\{e\}/g,a.e));
+  $("#gen").innerHTML=out.map(t=>`<li><span>${esc(t)}</span><button type="button" class="btn small ghost" data-use="${esc(t)}">Utiliser</button></li>`).join("");
+}
+function renderAuto(){
+  const t=S.myq.trim(),n=norm(t),words=t?t.split(/\s+/).length:0;
+  const open=/^(comment|pourquoi|dans quelle mesure|en quoi|quel|quelle|quels|quelles|faut-il|peut-on|jusqu|a quel|qu'est-ce qui|qu’est-ce qui)/.test(n);
+  const closed=/^est-ce que/.test(n);
+  const items=!t?[["nt","Écris ta question pour la vérifier automatiquement."]]:[
+    [t.endsWith("?")?"ok":"ko",t.endsWith("?")?"Elle se termine par un point d’interrogation.":"Ajoute un point d’interrogation à la fin."],
+    [closed?"ko":open?"ok":"nt",closed?"« Est-ce que » appelle un oui ou un non : préfère « Comment », « Pourquoi » ou « Dans quelle mesure ».":open?"Elle est ouverte : elle appelle une explication argumentée.":"Vérifie qu’elle n’appelle pas une simple réponse oui ou non."],
+    [words>=7&&words<=25?"ok":"ko",words<7?"Elle est très courte ("+words+" mots) : précise le système ou l’enjeu.":words>25?"Elle est longue ("+words+" mots) : le jury doit pouvoir la retenir.":"Sa longueur est adaptée ("+words+" mots)."]
+  ];
+  $("#autochecks").innerHTML=items.map(([c,l])=>`<li><span class="${c}">${c==="ok"?"✓":c==="ko"?"✗":"·"}</span><span>${esc(l)}</span></li>`).join("");
+}
+function renderOrient(){
+  const o=ORIENT.find(x=>x[0]===S.or);
+  $("#orient").innerHTML=`<span class="eyebrow">Les 5 dernières minutes · projet d’orientation</span>
+   <p>${esc(o&&o[2]?o[2]:"Indique ton projet après le bac à l’étape 1 pour recevoir un conseil sur la partie orientation de l’oral.")}</p>`;
+}
+
+/* ---------- Navigation ---------- */
+function go(n){
+  if(n>0&&S.step===0&&!S.spe&&n>S.step){$("#spe-msg").hidden=false;return;}
+  $("#spe-msg").hidden=true;
+  S.step=Math.max(0,Math.min(4,n));save();
+  document.querySelectorAll("[data-step]").forEach(p=>p.hidden=+p.dataset.step!==S.step);
+  document.querySelectorAll("#steps button").forEach((b,i)=>{b.toggleAttribute("aria-current",i===S.step);if(i===S.step)b.setAttribute("aria-current","step");b.classList.toggle("done",i<S.step);});
+  if(S.step===3)buildChapters();
+  if(S.step===4){renderResults();renderAuto();}
+}
+
+/* ---------- Fiche à copier ---------- */
+function summary(){
+  const sp=SPE[S.spe];const L=[];
+  L.push("GRAND ORAL – BOUSSOLE SI"+(S.name?" – "+S.name:""));
+  L.push("Spécialités : SI"+(sp?" + "+speName():""));
+  L.push("Orientation : "+(S.or?orName():"non précisée"));
+  L.push("Auto-évaluation SI : "+DOMS.map(d=>d.l+" "+(S.dom[d.id]||"?")+"/4").join(" · "));
+  L.push("Intérêts : "+(S.th.map(t=>lab("th",thL,t)).join(", ")||"—"));
+  L.push("Ce que j’aime faire : "+(S.sty.map(t=>lab("sty",styL,t)).join(", ")||"—"));
+  if(sp&&S.ch.length)L.push("Chapitres appréciés en "+sp.l+" : "+S.ch.map(c=>c==="autre"?(S.other.ch.trim()||"Autre"):(sp.ch.find(x=>x[0]===c)||[,c])[1]).join(", "));
+  if(S.kw)L.push("Mots-clés : "+S.kw);
+  L.push("");L.push("QUESTIONS GARDÉES");
+  if(!S.keep.length)L.push("(aucune pour l’instant)");
+  S.keep.forEach((id,i)=>L.push((i+1)+". ["+Q[id].ref+"] "+Q[id].q));
+  if(S.myq.trim()){L.push("");L.push("MA FORMULATION");L.push(S.myq.trim());}
+  L.push("");L.push("TOP 3 SUGGESTIONS SI");ranked("SI").slice(0,3).forEach(r=>L.push("- "+r.q.q));
+  if(sp&&sp.ch.length){L.push("TOP 3 SUGGESTIONS SI × "+sp.l);ranked("TR").slice(0,3).forEach(r=>L.push("- "+r.q.q));}
+  return L.join("\n");
+}
+
+/* ---------- Événements ---------- */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button");if(!t)return;
+  if(t.dataset.go!==undefined)go(+t.dataset.go);
+  else if(t.hasAttribute("data-next"))go(S.step+1);
+  else if(t.hasAttribute("data-prev"))go(S.step-1);
+  else if(t.dataset.tab){S.tab=t.dataset.tab;showAll=false;save();renderResults();}
+  else if(t.dataset.keep!==undefined){const id=+t.dataset.keep;const i=S.keep.indexOf(id);
+    if(i>=0)S.keep.splice(i,1);else{if(S.keep.length>=2)S.keep.shift();S.keep.push(id);}save();renderResults();}
+  else if(t.dataset.forge!==undefined){S.myq=Q[+t.dataset.forge].q;$("#f-myq").value=S.myq;save();renderAuto();$("#f-myq").focus();}
+  else if(t.dataset.use!==undefined){S.myq=t.dataset.use;$("#f-myq").value=S.myq;save();renderAuto();}
+  else if(t.id==="btn-more"){showAll=!showAll;renderResults();}
+  else if(t.id==="btn-demo"){S=Object.assign(blank(),{spe:"P",or:"ener",pref:"both",local:true,dom:{bes:2,mec:3,nrj:4,ele:3,num:2,aut:2,mod:3,mat:2},th:["ener","env","eau"],sty:["exp","calc"],kw:"panneaux solaires, pompe",ch:["lumiere","elec","thermo"],sys:"pompe solaire",g:"f",angle:"acces"});save();fillForm();go(4);window.scrollTo({top:0});}
+  else if(t.id==="btn-copy"){const txt=summary();const box=$("#copybox");box.value=txt;
+    const fallback=()=>{box.hidden=false;box.focus();box.select();$("#copy-msg").textContent="Sélectionne le texte ci-dessous et copie-le (Ctrl+C).";};
+    try{navigator.clipboard.writeText(txt).then(()=>{$("#copy-msg").textContent="Fiche copiée. Colle-la dans ton message.";box.hidden=true;},fallback);}catch(err){fallback();}}
+  else if(t.id==="btn-reset"){$("#reset-confirm").hidden=false;}
+  else if(t.id==="btn-reset-no"){$("#reset-confirm").hidden=true;}
+  else if(t.id==="btn-reset-yes"){S=blank();save();fillForm();$("#reset-confirm").hidden=true;go(0);}
+});
+document.addEventListener("change",e=>{
+  const i=e.target;
+  setTimeout(()=>{const k=i.name==="spe"?(i.value==="X"&&"spe"):i.id==="f-or"?(i.value==="autre"&&"or"):(i.value==="autre"&&i.checked&&i.dataset.list);if(k)$("#o-"+k).focus();},0);
+  if(i.name==="spe"){if(S.spe!==i.value)S.ch=[];S.spe=i.value;$("#spe-msg").hidden=true;}
+  else if(i.name==="pref")S.pref=i.value;
+  else if(i.name&&i.name.startsWith("dom-"))S.dom[i.name.slice(4)]=+i.value;
+  else if(i.dataset.list){const arr=S[i.dataset.list];const k=arr.indexOf(i.value);if(i.checked&&k<0)arr.push(i.value);if(!i.checked&&k>=0)arr.splice(k,1);}
+  else if(i.id==="f-or")S.or=i.value;
+  else if(i.id==="f-local")S.local=i.checked;
+  else if(i.id==="fg-g"){S.g=i.value;renderForge();}
+  else if(i.id==="fg-angle"){S.angle=i.value;renderForge();}
+  else if(i.dataset.ck!==undefined){const n=+i.dataset.ck;S.checks=S.checks.filter(x=>x!==n);if(i.checked)S.checks.push(n);}
+  syncOther();save();
+});
+document.addEventListener("input",e=>{
+  const i=e.target;
+  if(i.id==="f-name")S.name=i.value;
+  else if(i.id==="f-kw")S.kw=i.value;
+  else if(i.id==="fg-sys"){S.sys=i.value;renderForge();}
+  else if(i.id==="f-myq"){S.myq=i.value;renderAuto();}
+  else if(i.dataset.other){S.other[i.dataset.other]=i.value;}
+  else return;
+  save();
+});
+
+buildStatic();fillForm();go(S.step);
+</script>
+
+</body></html>
