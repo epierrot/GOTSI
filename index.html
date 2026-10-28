@@ -198,13 +198,13 @@ footer{font-size:var(--s-xs);color:var(--ink-2);font-family:var(--f-mono)}
       <h1>Boussole du Grand oral</h1>
       <p class="lede">Réponds à un court sondage sur ce que tu sais faire en SI, ce qui te passionne et ce que tu aimes dans ta deuxième spécialité. La boussole te propose des questions et des pistes de réflexion, en SI seule ou croisées avec ton autre spécialité. Rien n’est envoyé : tes réponses restent sur ton appareil.</p>
     </div>
-    <div class="titleblock" aria-label="Format de l’épreuve">
+    <div class="titleblock" aria-label="Format de l’épreuve, session 2027">
       <div><span>Préparation</span><b>20 min</b></div>
-      <div><span>Exposé</span><b>5 min</b></div>
+      <div><span>Exposé</span><b>10 min</b></div>
       <div><span>Échange</span><b>10 min</b></div>
-      <div><span>Orientation</span><b>5 min</b></div>
+      <div><span>Épreuve</span><b>20 min</b></div>
       <div><span>Questions</span><b>2</b></div>
-      <div><span>Coefficient</span><b>10</b></div>
+      <div><span>Coefficient</span><b>8</b></div>
     </div>
   </header>
 
@@ -215,7 +215,7 @@ footer{font-size:var(--s-xs);color:var(--ink-2);font-family:var(--f-mono)}
     <div class="panel-head">
       <div class="eyebrow">Étape 1 sur 5</div>
       <h2>Ton profil</h2>
-      <p>Ta deuxième spécialité permet de te proposer des questions transversales. Ton projet d’orientation sert pour la dernière partie de l’oral.</p>
+      <p>Ta deuxième spécialité permet de te proposer des questions transversales. Ton projet après le bac aide à trouver des sujets qui te motivent et à expliquer ton choix au jury.</p>
     </div>
     <div class="row2">
       <div class="field">
@@ -255,7 +255,7 @@ footer{font-size:var(--s-xs);color:var(--ink-2);font-family:var(--f-mono)}
     <div class="panel-head">
       <div class="eyebrow">Étape 2 sur 5</div>
       <h2>Ce que tu maîtrises en SI</h2>
-      <p>Sois honnête : un domaine que tu découvres n’est pas exclu, il sera simplement signalé comme « à consolider ». Le jury te questionnera pendant 10 minutes sur les notions que tu cites.</p>
+      <p>Sois honnête : un domaine que tu découvres n’est pas exclu, il sera simplement signalé comme « à consolider ». Pendant les 10 minutes d’échange, le jury peut t’interroger sur tout le programme de SI du cycle terminal en lien avec ta question.</p>
     </div>
     <div class="scale-legend"><span>1 · Je découvre</span><span>2 · Ça va</span><span>3 · À l’aise</span><span>4 · Je maîtrise</span></div>
     <div id="rates"></div>
@@ -328,14 +328,15 @@ footer{font-size:var(--s-xs);color:var(--ink-2);font-family:var(--f-mono)}
     <div class="panel-head" style="margin-top:8px">
       <div class="eyebrow">Ta sélection</div>
       <h2>Mes deux questions</h2>
-      <p>Le jury en choisira une. Elles peuvent porter sur la SI seule, sur ta deuxième spécialité ou sur les deux.</p>
+      <p>Le jury en choisit une, selon les spécialités de ses membres. Tes deux spécialités doivent être représentées : une question SI et une question dans ton autre spécialité, une question SI et une transversale, ou deux transversales.</p>
     </div>
     <div class="tray" id="tray"></div>
+    <p id="conf"></p>
 
     <div class="panel-head" style="margin-top:8px">
       <div class="eyebrow">Atelier</div>
       <h2>Rends ta question personnelle</h2>
-      <p>Choisis un système précis et un angle d’attaque : l’atelier propose des formulations. Puis vérifie ta question avec la grille.</p>
+      <p>Choisis un système précis et un angle d’attaque : l’atelier propose des formulations. Le jury n’évalue pas la formulation, mais une question claire t’aide à construire un exposé de 10 minutes solide.</p>
     </div>
     <div class="forge">
       <div class="forge-in">
@@ -382,7 +383,7 @@ footer{font-size:var(--s-xs);color:var(--ink-2);font-family:var(--f-mono)}
     <p class="msg" id="reset-confirm" hidden>Tout effacer ? <button class="btn small" type="button" id="btn-reset-yes">Oui, effacer</button> <button class="btn small ghost" type="button" id="btn-reset-no">Annuler</button></p>
   </section>
 
-  <footer>Boussole du Grand oral · Spécialité SI · Les questions proposées sont des pistes à retravailler avec ton professeur, pas des sujets clés en main.</footer>
+  <footer>Boussole du Grand oral · Spécialité SI · Format de l’épreuve : note de service du 10-9-2026 (BO spécial n° 4 du 17-9-2026), applicable à la session 2027. Les questions proposées sont des pistes à retravailler avec tes professeurs, pas des sujets clés en main.</footer>
 </div>
 
 <script>
@@ -455,11 +456,11 @@ const ANGLES=[
   "À quoi ressemblera {le} {sys} dans vingt ans ?"]]
 ];
 const CHECKS=[
- "Je peux citer un système réel et le montrer (photo, schéma, maquette).",
+ "Je peux citer un système réel et le schématiser au tableau (aucun document n’est autorisé).",
  "Je sais quelles notions de SI (et de ma 2ᵉ spé) je mobilise.",
- "Je peux l’expliquer en 5 minutes à quelqu’un qui ne fait pas de SI.",
+ "Je peux tenir 10 minutes d’exposé : pourquoi ce choix, développement, réponse.",
  "J’ai une réponse argumentée, avec des chiffres ou des mesures.",
- "Elle me concerne personnellement : je peux dire pourquoi je l’ai choisie."
+ "Je sais expliquer pourquoi je l’ai choisie pendant ma formation."
 ];
 
 /* ---------- Banque de questions ----------
@@ -825,10 +826,10 @@ function renderResults(){
    <div><span>Points forts SI</span><b>${strong.length?esc(strong.join(", ")):"à préciser"}</b></div>
    <div><span>Intérêts</span><b>${S.th.length?esc(S.th.map(t=>lab("th",thL,t)).join(", ")):"aucun choisi"}</b></div>
    <div><span>Orientation</span><b>${esc(orName())}</b></div>`;
-  const adv={si:"Tu préfères rester en SI : garde au moins une question 100 % SI. La seconde peut être transversale pour montrer l’étendue de tes connaissances.",
-    tr:"Tu aimes croiser les disciplines : une question transversale te permet de mobiliser tes deux spécialités. Vérifie que la partie SI reste solide, le jury l’attend.",
-    both:"Bonne stratégie : une question 100 % SI et une question transversale. Si le jury choisit l’une ou l’autre, tu montres deux facettes de ton profil."}[S.pref];
-  $("#advice").textContent=(sp&&!sp.ch.length)?"Pour ta deuxième spécialité, la boussole ne propose que des questions SI. Tu peux construire une question transversale avec l’atelier plus bas et ton professeur.":adv;
+  const adv={si:"Tu préfères rester en SI : garde une question 100 % SI. Ta seconde question doit représenter ton autre spécialité : soit transversale, soit propre à cette spécialité (à préparer avec ton professeur de cette discipline).",
+    tr:"Tu aimes croiser les disciplines : tu peux présenter deux questions transversales. Vérifie que la partie SI de chacune reste solide, le jury peut t’interroger sur tout le programme.",
+    both:"Bonne stratégie : une question 100 % SI et une question transversale. Le jury choisit selon ses spécialités : prépare les deux avec le même sérieux."}[S.pref];
+  $("#advice").textContent=(sp&&!sp.ch.length)?"Pour ta deuxième spécialité, la boussole ne propose que des questions SI. Ta seconde question doit porter sur ton autre spécialité ou être transversale : construis-la avec l’atelier et tes professeurs.":adv;
   $("#tabs").innerHTML=tabs.map(t=>{const n=t.id==="SI"?Q.filter(q=>q.s==="SI").length:Q.filter(q=>q.s===S.spe).length;return `<button type="button" role="tab" id="tab-${t.id}" aria-selected="${t.id===S.tab}" data-tab="${t.id}">${esc(t.l)} <span class="count">${n}</span></button>`;}).join("");
   $("#tabpanel").setAttribute("aria-labelledby","tab-"+S.tab);
   const list=ranked(S.tab==="SI"?"SI":"TR");
@@ -852,7 +853,7 @@ function cardHTML(r,open){
     <details ${open?"open":""}><summary>Pistes de réflexion</summary>
      <ul class="pistes">${q.p.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
      <div class="notions"><div><b>Notions SI</b>${esc(q.n)}</div>${tr?`<div><b>Notions ${esc(SPE[q.s].l)}</b>${esc(q.n2)}</div>`:""}</div>
-     <p class="demo"><b>Support à montrer au jury</b>${esc(q.x)}</p>
+     <p class="demo"><b>À expérimenter en classe, puis à schématiser au tableau</b>${esc(q.x)}</p>
     </details>
    </div>
    <div class="card-foot"><button type="button" class="btn small keep" data-keep="${q.id}" aria-pressed="${kept}">${kept?"Gardée ✓":"Garder cette question"}</button></div>
@@ -864,6 +865,15 @@ function renderTray(){
     return `<div class="slot"><span class="eyebrow">Question ${i+1} · ${esc(q.ref)}</span><p class="q">${esc(q.q)}</p>
      <div class="acts"><button type="button" class="btn small" data-forge="${id}">Retravailler dans l’atelier</button><button type="button" class="btn small ghost" data-keep="${id}">Retirer</button></div></div>`;});
   $("#tray").innerHTML=slots.join("");
+  const c=conformity();$("#conf").className=c[0]==="ok"?"advice":c[0]==="ko"?"vig":"muted";$("#conf").textContent=c[1];
+}
+function conformity(){
+  const k=S.keep.map(id=>Q[id]),nSI=k.filter(q=>q.s==="SI").length,nTR=k.length-nSI,other=speName()||"ton autre spécialité";
+  if(k.length===2&&nSI===2)return["ko","Non conforme : deux questions 100 % SI ne représentent pas "+other+". Remplace l’une par une question transversale ou par une question propre à "+other+". Sinon l’épreuve ne peut pas avoir lieu."];
+  if(k.length===2)return["ok",nTR===2?"Conforme : deux questions transversales.":"Conforme : une question SI et une question transversale."];
+  if(k.length===1&&nSI===1)return["nt","Ta seconde question doit être transversale, ou porter sur "+other+" seule (à construire avec ton professeur de cette spécialité)."];
+  if(k.length===1)return["nt","Ta seconde question peut être 100 % SI, transversale, ou propre à "+other+"."];
+  return["nt","Garde deux questions pour vérifier qu’elles respectent les règles de l’épreuve."];
 }
 function art(sys,g){
   const v=/^[aeiouyhàâéèêîïôûœ]/i.test(sys);
@@ -890,8 +900,9 @@ function renderAuto(){
 }
 function renderOrient(){
   const o=ORIENT.find(x=>x[0]===S.or);
-  $("#orient").innerHTML=`<span class="eyebrow">Les 5 dernières minutes · projet d’orientation</span>
-   <p>${esc(o&&o[2]?o[2]:"Indique ton projet après le bac à l’étape 1 pour recevoir un conseil sur la partie orientation de l’oral.")}</p>`;
+  $("#orient").innerHTML=`<span class="eyebrow">Début de l’exposé · pourquoi ce choix</span>
+   <p>Le jury attend d’abord que tu expliques pourquoi tu as choisi de préparer cette question pendant ta formation. Tu développes ensuite ta question, puis tu y réponds, en 10 minutes, debout.</p>
+   <p class="muted">${esc(o&&o[2]?"Lien avec ton projet : "+o[2]:"Indique ton projet après le bac à l’étape 1 pour recevoir une idée d’accroche personnelle.")}</p>`;
 }
 
 /* ---------- Navigation ---------- */
@@ -919,6 +930,7 @@ function summary(){
   L.push("");L.push("QUESTIONS GARDÉES");
   if(!S.keep.length)L.push("(aucune pour l’instant)");
   S.keep.forEach((id,i)=>L.push((i+1)+". ["+Q[id].ref+"] "+Q[id].q));
+  L.push("Règle des deux spécialités : "+conformity()[1]);
   if(S.myq.trim()){L.push("");L.push("MA FORMULATION");L.push(S.myq.trim());}
   L.push("");L.push("TOP 3 SUGGESTIONS SI");ranked("SI").slice(0,3).forEach(r=>L.push("- "+r.q.q));
   if(sp&&sp.ch.length){L.push("TOP 3 SUGGESTIONS SI × "+sp.l);ranked("TR").slice(0,3).forEach(r=>L.push("- "+r.q.q));}
